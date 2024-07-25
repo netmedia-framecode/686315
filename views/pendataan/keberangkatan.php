@@ -2,7 +2,7 @@
 require_once("redirect.php");
 $_SESSION["page-name"] = "Keberangkatan";
 $_SESSION["page-url"] = "keberangkatan";
-$_SESSION["actual-link"] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$_SESSION["actual-link"] = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $_SESSION["object-link"] = $baseURL . "/views/pendataan/";
 require_once("../../templates/views-top.php");
 ?>
@@ -328,7 +328,7 @@ require_once("../../templates/views-top.php");
                 </div>
               </div>
 
-              <?php if($role==2){?>
+              <?php if($role==2 && $row["status_strp"]!="Valid"){?>
               <div class="modal fade" id="ubah<?= $row['id_keberangkatan'] ?>" tabindex="-1"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -345,14 +345,14 @@ require_once("../../templates/views-top.php");
                             benar ?</label>
                           <div class="d-flex">
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="validasi" id="valid" value="Valid"
+                              <input class="form-check-input" type="radio" name="status_strp" id="valid" value="Valid"
                                 checked>
                               <label class="form-check-label" for="valid">
                                 Valid
                               </label>
                             </div>
                             <div class="form-check" style="margin-left: 10px;">
-                              <input class="form-check-input" type="radio" name="validasi" id="tidak-valid"
+                              <input class="form-check-input" type="radio" name="status_strp" id="tidak-valid"
                                 value="Tidak Valid">
                               <label class="form-check-label" for="tidak-valid">
                                 Tidak Valid
@@ -369,7 +369,7 @@ require_once("../../templates/views-top.php");
                   </div>
                 </div>
               </div>
-              <?php }else if($role==1){?>
+              <?php }else if($role==1 && $row["status_formulir"]!="Valid"){?>
               <div class="modal fade" id="ubah<?= $row['id_keberangkatan'] ?>" tabindex="-1"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -386,14 +386,14 @@ require_once("../../templates/views-top.php");
                             <?= $row['nama_pengemudi'] ?> benar ?</label>
                           <div class="d-flex">
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="kesehatan" id="valid" value="Valid"
-                                checked>
+                              <input class="form-check-input" type="radio" name="status_formulir" id="valid"
+                                value="Valid" checked>
                               <label class="form-check-label" for="valid">
                                 Valid
                               </label>
                             </div>
                             <div class="form-check" style="margin-left: 10px;">
-                              <input class="form-check-input" type="radio" name="kesehatan" id="tidak-valid"
+                              <input class="form-check-input" type="radio" name="status_formulir" id="tidak-valid"
                                 value="Tidak Valid">
                               <label class="form-check-label" for="tidak-valid">
                                 Tidak Valid
@@ -404,8 +404,13 @@ require_once("../../templates/views-top.php");
                       </div>
                       <div class="modal-footer border-top-0 justify-content-center">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <?php if($row['status_strp']=="Valid"){?>
                         <button type="submit" name="validasi_formulir_keberangkatan"
-                          class="btn btn-warning">Ubah</button>
+                          class="btn btn-outline-warning">Ubah</button>
+                        <?php }else{?>
+                        <button type="button" class="btn btn-outline-warning border shadow">Ubah</button>
+                        <p class="mt-5">Anda belum bisa validasi dikarenakan berkas STRP belum di validasi!</p>
+                        <?php }?>
                       </div>
                     </form>
                   </div>
@@ -493,7 +498,6 @@ require_once("../../templates/views-top.php");
         JOIN bahan_bakar ON strp.id_bahan_bakar = bahan_bakar.id_bahan_bakar
         WHERE strp.no_polisi = '$no_polisi'
         AND keberangkatan.status_strp = 'Valid'
-        OR keberangkatan.status_formulir = 'Valid'
     ";
     $views_keberangkatan = mysqli_query($conn, $keberangkatan);
     if(mysqli_num_rows($views_keberangkatan)==0){?>
@@ -508,6 +512,124 @@ require_once("../../templates/views-top.php");
         $tgl_lahir = date_create($data["tgl_lahir"]);
         $tgl_lahir = date_format($tgl_lahir, "d M Y");
         if($type_file=="strp"){?>
+<div class="card shadow">
+  <div class="card-body">
+    <div class="d-flex justify-content-end">
+      <a href="cetak-strp-keberangkatan" class="btn btn-success ml-3" target="_blank"><i class="bi bi-printer"></i>
+        Cetak</a>
+    </div>
+    <div style="width: 100%;">
+      <table style="width: 100%;" style="border: 1px solid #000;">
+        <tbody>
+          <tr>
+            <td style="text-align: left;">
+              <h5 class="text-dark" style="font-size: 12px;font-weight: bold;">KEPOLISIAN DAERAH NUSA TENGGARA TIMUR
+                <br>RESOR MALAKA
+                <br>SATUAN LALU LINTAS
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-dark"
+      style="font-size: 12px;text-align: left;padding: 5px;margin-top: 0;border-bottom: 2px solid black;font-weight: bold;">Jalan Ahmad Yani No.10 Betun - Malaka 85672</p>
+    <h5 class="text-dark"
+      style="font-size: 12px;text-align: center;font-weight: bold; margin-top: 0;">SURAT TANDA REGISTRASI PENOMORAN (STRP) RANMOR INDONESIA YANG MASUK DIWILAYAH RDTL
+    </h5>
+    <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: 0;">
+      <thead>
+        <tr>
+          <th colspan="3">Telah melapor di SATUAN LALU LINTAS PLBN MOTAMASIN, kendaraan Indonesia dengan identitas sebagai berikut :</th>
+        </tr>
+        <tr>
+          <td style="width: 250px;">Nomor Registrasi</td>
+          <td>:</td>
+          <td>STRP / <?= $data["no_registrasi"]?> / II ? <?= date('Y')?> / MOTAMASIN</td>
+        </tr>
+        <tr>
+          <td>Nomor Polisi</td>
+          <td>:</td>
+          <td><?= $data["no_polisi"]?></td>
+        </tr>
+        <tr>
+          <td>Nama Pemilik</td>
+          <td>:</td>
+          <td><?= $data["nama_pemilik"]?></td>
+        </tr>
+        <tr>
+          <td>Alamat Pemilik</td>
+          <td>:</td>
+          <td><?= $data["alamat_pemilik"]?></td>
+        </tr>
+        <tr>
+          <td>Nama Pengemudi</td>
+          <td>:</td>
+          <td><?= $data["nama_pengemudi"]?></td>
+        </tr>
+        <tr>
+          <td>No. SIM</td>
+          <td>:</td>
+          <td><?= $data["no_sim"]?></td>
+        </tr>
+        <tr>
+          <td>No. Pasport</td>
+          <td>:</td>
+          <td><?= $data["no_pasport"]?></td>
+        </tr>
+        <tr>
+          <td>Warga Negara</td>
+          <td>:</td>
+          <td><?= $data["warga_negara"]?></td>
+        </tr>
+        <tr>
+          <td>Merk / Jenis</td>
+          <td>:</td>
+          <td><?= $data["jenis_kendaraan"]?></td>
+        </tr>
+        <tr>
+          <td>Tahun Pembuatan / CC</td>
+          <td>:</td>
+          <td><?= $data["tahun_pembuatan"]?> / <?= $data["cc"]?></td>
+        </tr>
+        <tr>
+          <td>No. Rangka</td>
+          <td>:</td>
+          <td><?= $data["no_rangka"]?></td>
+        </tr>
+        <tr>
+          <td>No. Mesin</td>
+          <td>:</td>
+          <td><?= $data["no_mesin"]?></td>
+        </tr>
+        <tr>
+          <td>Warna</td>
+          <td>:</td>
+          <td><?= $data["warna"]?></td>
+        </tr>
+        <tr>
+          <td>Bahan Bakar</td>
+          <td>:</td>
+          <td><?= $data["bahan_bakar"]?></td>
+        </tr>
+        <tr>
+          <td>Maksud Kunjungan</td>
+          <td>:</td>
+          <td><?= $data["maksud_kunjungan"]?></td>
+        </tr>
+        <tr>
+          <td>Alamat Tujuan</td>
+          <td>:</td>
+          <td><?= $data["alamat_tujuan"]?></td>
+        </tr>
+        <tr>
+          <td>Berlaku Hingga</td>
+          <td>:</td>
+          <td><?= $data["berlaku_hingga"]?></td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
 <?php }else if($type_file=="formulir_wawancara"){?>
 <div class="card shadow">
   <div class="card-body">
@@ -691,21 +813,24 @@ require_once("../../templates/views-top.php");
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
           <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia
             <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> atas kendaraan dan
-            <strong>barang-barang</strong> yang dimuat diatasnya ?</td>
+            <strong>barang-barang</strong> yang dimuat diatasnya ?
+          </td>
           <td style="border: 1px solid #000;"><?= $data['pelanggaran_atas_barang']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
           <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia
             <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini
-            <strong>dijual, disewakan, dihibahkan, dibuang</strong> di negara tujuan <strong>tanpa izin</strong> ?</td>
+            <strong>dijual, disewakan, dihibahkan, dibuang</strong> di negara tujuan <strong>tanpa izin</strong> ?
+          </td>
           <td style="border: 1px solid #000;"><?= $data['pelanggaran_atas_penyalahgunaan']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
           <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia
             <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini
-            <strong>dirubah bentuknya</strong> di negara tujuan secara hakiki <strong>tanpa izin</strong> ?</td>
+            <strong>dirubah bentuknya</strong> di negara tujuan secara hakiki <strong>tanpa izin</strong> ?
+          </td>
           <td style="border: 1px solid #000;"><?= $data['pelanggaran_atas_modifikasi']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
@@ -713,7 +838,8 @@ require_once("../../templates/views-top.php");
           <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia
             <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> kendaraan ini
             keberadaannya di negara tujuan <strong>melebihi batas waktu</strong> yang telah ditetapkan yakni <strong>30
-              ( tiga puluh ) hari</strong> ?</td>
+              ( tiga puluh ) hari</strong> ?
+          </td>
           <td style="border: 1px solid #000;"><?= $data['pelanggaran_atas_waktu']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
@@ -731,4 +857,4 @@ require_once("../../templates/views-top.php");
 <?php }}}}?>
 <!-- end::Content -->
 
-<?p
+<?php require_once("../../templates/views-bottom.php");?>

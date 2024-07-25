@@ -2,7 +2,7 @@
 require_once("redirect.php");
 $_SESSION["page-name"] = "Formulir Wawancara";
 $_SESSION["page-url"] = "formulir-wawancara";
-$_SESSION["actual-link"] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$_SESSION["actual-link"] = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $_SESSION["object-link"] = $baseURL . "/views/pendataan/";
 require_once("../../templates/views-top.php");
 ?>

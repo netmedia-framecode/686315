@@ -1,46 +1,26 @@
 <?php
+
 /**
- * PHPExcel
- *
- * Copyright (c) 2006 - 2015 PHPExcel
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- *
- * @category   PHPExcel
- * @package    PHPExcel
- * @copyright  Copyright (c) 2006 - 2015 PHPExcel (http://www.codeplex.com/PHPExcel)
- * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
- * @version    ##VERSION##, ##DATE##
+ * Afrikaans PHPMailer language file: refer to English translation for definitive list
+ * @package PHPMailer
  */
 
-/** Error reporting */
-error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
-date_default_timezone_set('Europe/London');
-
-if (PHP_SAPI == 'cli')
-	die('This example should only be run from a Web Browser');
-
-/** Include PHPExcel */
-require_once dirname(__FILE__) . '/../Classes/PHPExcel.php';
-
-
-// Create new PHPExcel object
-$objPHPExcel = new PHPExcel();
-
-// Set document properties
-$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
-							 ->setLastModifiedBy("Maarten 
+$PHPMAILER_LANG['authenticate']         = 'SMTP-fout: kon nie geverifieer word nie.';
+$PHPMAILER_LANG['connect_host']         = 'SMTP-fout: kon nie aan SMTP-verbind nie.';
+$PHPMAILER_LANG['data_not_accepted']    = 'SMTP-fout: data nie aanvaar nie.';
+$PHPMAILER_LANG['empty_message']        = 'Boodskapliggaam leeg.';
+$PHPMAILER_LANG['encoding']             = 'Onbekende kodering: ';
+$PHPMAILER_LANG['execute']              = 'Kon nie uitvoer nie: ';
+$PHPMAILER_LANG['file_access']          = 'Kon nie lêer oopmaak nie: ';
+$PHPMAILER_LANG['file_open']            = 'Lêerfout: Kon nie lêer oopmaak nie: ';
+$PHPMAILER_LANG['from_failed']          = 'Die volgende Van adres misluk: ';
+$PHPMAILER_LANG['instantiate']          = 'Kon nie posfunksie instansieer nie.';
+$PHPMAILER_LANG['invalid_address']      = 'Ongeldige adres: ';
+$PHPMAILER_LANG['mailer_not_supported'] = ' mailer word nie ondersteun nie.';
+$PHPMAILER_LANG['provide_address']      = 'U moet ten minste een ontvanger e-pos adres verskaf.';
+$PHPMAILER_LANG['recipients_failed']    = 'SMTP-fout: Die volgende ontvangers het misluk: ';
+$PHPMAILER_LANG['signing']              = 'Ondertekening Fout: ';
+$PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP-verbinding () misluk.';
+$PHPMAILER_LANG['smtp_error']           = 'SMTP-bediener fout: ';
+$PHPMAILER_LANG['variable_set']         = 'Kan nie veranderlike instel of herstel nie: ';
+$PHPMAILER_LANG['extension_missing']    = 'Uitbreiding ontbreek: ';

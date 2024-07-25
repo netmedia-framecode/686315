@@ -1,58 +1,46 @@
-<?php
-/**
- * PHPExcel
- *
- * Copyright (c) 2006 - 2015 PHPExcel
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- *
- * @category   PHPExcel
- * @package    PHPExcel
- * @copyright  Copyright (c) 2006 - 2015 PHPExcel (http://www.codeplex.com/PHPExcel)
- * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
- * @version    ##VERSION##, ##DATE##
- */
+GPL Cooperation Commitment
+Version 1.0
 
-/** Error reporting */
-error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
-date_default_timezone_set('Europe/London');
+Before filing or continuing to prosecute any legal proceeding or claim
+(other than a Defensive Action) arising from termination of a Covered
+License, we commit to extend to the person or entity ('you') accused
+of violating the Covered License the following provisions regarding
+cure and reinstatement, taken from GPL version 3. As used here, the
+term 'this License' refers to the specific Covered License being
+enforced.
 
-if (PHP_SAPI == 'cli')
-	die('This example should only be run from a Web Browser');
+    However, if you cease all violation of this License, then your
+    license from a particular copyright holder is reinstated (a)
+    provisionally, unless and until the copyright holder explicitly
+    and finally terminates your license, and (b) permanently, if the
+    copyright holder fails to notify you of the violation by some
+    reasonable means prior to 60 days after the cessation.
 
-/** Include PHPExcel */
-require_once dirname(__FILE__) . '/../Classes/PHPExcel.php';
+    Moreover, your license from a particular copyright holder is
+    reinstated permanently if the copyright holder notifies you of the
+    violation by some reasonable means, this is the first time you
+    have received notice of violation of this License (for any work)
+    from that copyright holder, and you cure the violation prior to 30
+    days after your receipt of the notice.
 
+We intend this Commitment to be irrevocable, and binding and
+enforceable against us and assignees of or successors to our
+copyrights.
 
-//	Change these values to select the Rendering library that you wish to use
-//		and its directory location on your server
-//$rendererName = PHPExcel_Settings::PDF_RENDERER_TCPDF;
-$rendererName = PHPExcel_Settings::PDF_RENDERER_MPDF;
-//$rendererName = PHPExcel_Settings::PDF_RENDERER_DOMPDF;
-//$rendererLibrary = 'tcPDF5.9';
-$rendererLibrary = 'mPDF5.4';
-//$rendererLibrary = 'domPDF0.6.0beta3';
-$rendererLibraryPath = dirname(__FILE__).'/../../../libraries/PDF/' . $rendererLibrary;
+Definitions
 
+'Covered License' means the GNU General Public License, version 2
+(GPLv2), the GNU Lesser General Public License, version 2.1
+(LGPLv2.1), or the GNU Library General Public License, version 2
+(LGPLv2), all as published by the Free Software Foundation.
 
-// Create new PHPExcel object
-$objPHPExcel = new PHPExcel();
+'Defensive Action' means a legal proceeding or claim that We bring
+against you in response to a prior proceeding or claim initiated by
+you or your affiliate.
 
-// Set document properties
-$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
-							 ->setLastModifiedBy("Maarten Balliauw")
-							 ->se
+'We' means each contributor to this repository as of the date of
+inclusion of this file, including subsidiaries of a corporate
+contributor.
+
+This work is available under a Creative Commons Attribution-ShareAlike
+4.0 International license (https://creativecommons.org/licenses/by-sa/4.0/).

@@ -856,25 +856,29 @@ if (isset($_SESSION['data-user'])) {
 
   function validasi_keberangkatan($conn, $data, $action)
   {
-    if ($action == "insert") {
+    if ($action == "strp") {
+      $sql = "UPDATE keberangkatan SET status_strp='$data[status_strp]' WHERE id_keberangkatan='$data[id_keberangkatan]'";
     }
 
-    if ($action == "update") {
+    if ($action == "formulir") {
+      $sql = "UPDATE keberangkatan SET status_formulir='$data[status_formulir]' WHERE id_keberangkatan='$data[id_keberangkatan]'";
     }
 
-    // mysqli_query($conn, $sql);
+    mysqli_query($conn, $sql);
     return mysqli_affected_rows($conn);
   }
 
   function validasi_kedatangan($conn, $data, $action)
   {
-    if ($action == "insert") {
+    if ($action == "strp") {
+      $sql = "UPDATE kedatangan SET status_strp='$data[status_strp]' WHERE id_kedatangan='$data[id_kedatangan]'";
     }
 
-    if ($action == "update") {
+    if ($action == "formulir") {
+      $sql = "UPDATE kedatangan SET status_formulir='$data[status_formulir]' WHERE id_kedatangan='$data[id_kedatangan]'";
     }
 
-    // mysqli_query($conn, $sql);
+    mysqli_query($conn, $sql);
     return mysqli_affected_rows($conn);
   }
 

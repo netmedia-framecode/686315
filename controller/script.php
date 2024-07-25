@@ -52,6 +52,7 @@ if (isset($_SESSION['data-user'])) {
   $idUser = valid($conn, $_SESSION['data-user']['id']);
   $ipUser = valid($conn, $_SESSION['data-user']['ip']);
   $role = valid($conn, $_SESSION['data-user']['role']);
+  $name = valid($conn, $_SESSION['data-user']['name']);
 
   $ch = curl_init();
 
@@ -680,6 +681,7 @@ if (isset($_SESSION['data-user'])) {
       JOIN strp ON formulir_wawancara.id_strp = strp.id_strp
       JOIN warga_negara ON strp.id_warga_negara = warga_negara.id_warga_negara
       JOIN bahan_bakar ON strp.id_bahan_bakar = bahan_bakar.id_bahan_bakar
+      ORDER BY keberangkatan.id_keberangkatan DESC
   ";
   $views_keberangkatan = mysqli_query($conn, $keberangkatan);
   if (isset($_POST["validasi_strp_keberangkatan"])) {
@@ -694,7 +696,7 @@ if (isset($_SESSION['data-user'])) {
       exit();
     }
   }
-  if (isset($_POST["validasi_formulir"])) {
+  if (isset($_POST["validasi_formulir_keberangkatan"])) {
     $validated_post = array_map(function ($value) use ($conn) {
       return valid($conn, $value);
     }, $_POST);
@@ -706,6 +708,7 @@ if (isset($_SESSION['data-user'])) {
       exit();
     }
   }
+
   if(isset($_POST['search_keberangkatan'])){
     $type_file=valid($conn, $_POST['type_file']);
     $no_polisi=valid($conn, $_POST['no_polisi']);
@@ -718,8 +721,120 @@ if (isset($_SESSION['data-user'])) {
     exit;
   }
   // if (isset($_SESSION["keberangkatan"])){
-  //   if (isset($_SESSION['keberangkatan']["time_search"]) && (time() - $_SESSION['keberangkatan']["time_search"]) > 5) {
+  //   if (isset($_SESSION['keberangkatan']["time_search"]) && (time() - $_SESSION['keberangkatan']["time_search"]) > 15) {
   //     unset($_SESSION['keberangkatan']);
   //   }
   // }
+  
+  $count_kedatangan = "SELECT * FROM kedatangan";
+  $counts_kedatangan = mysqli_query($conn, $count_kedatangan);
+  $kedatangan = "SELECT kedatangan.*, 
+    formulir_wawancara.kategori, 
+    formulir_wawancara.kesehatan, 
+    formulir_wawancara.pengemudi_kendaraan, 
+    formulir_wawancara.nama_pengemudi, 
+    formulir_wawancara.tempat_lahir, 
+    formulir_wawancara.tgl_lahir, 
+    formulir_wawancara.no_pasport_pengemudi, 
+    formulir_wawancara.no_sim_pengemudi, 
+    formulir_wawancara.no_hp_pengemudi, 
+    formulir_wawancara.pemilik_kendaraan, 
+    formulir_wawancara.nama_pemilik_kendaraan, 
+    formulir_wawancara.identitas_pemilik_kendaraan, 
+    formulir_wawancara.surat_kuasa, 
+    formulir_wawancara.plat_nomor, 
+    formulir_wawancara.merek_kendaraan, 
+    formulir_wawancara.maksud_kunjungan, 
+    formulir_wawancara.waktu_kunjungan, 
+    formulir_wawancara.pelanggaran_atas_barang, 
+    formulir_wawancara.pelanggaran_atas_penyalahgunaan, 
+    formulir_wawancara.pelanggaran_atas_modifikasi, 
+    formulir_wawancara.pelanggaran_atas_waktu, 
+    formulir_wawancara.sanksi, 
+    alamat_pengemudi.jalan_pengemudi, 
+    alamat_pengemudi.kelurahan_pengemudi, 
+    alamat_pengemudi.kecamatan_pengemudi, 
+    alamat_pengemudi.kabupaten_kota_pengemudi, 
+    alamat_pengemudi.provinsi_pengemudi, 
+    alamat_kendaraan.jalan_kendaraan, 
+    alamat_kendaraan.kelurahan_kendaraan, 
+    alamat_kendaraan.kecamatan_kendaraan, 
+    alamat_kendaraan.kabupaten_kota_kendaraan, 
+    alamat_kendaraan.provinsi_kendaraan, 
+    alamat_tujuan.jalan_tujuan, 
+    alamat_tujuan.distric, 
+    alamat_tujuan.sub_distric, 
+    alamat_tujuan.suco, alamat_tujuan.aldeia, 
+    kepemilikan_kendaraan.kepemilikan_kendaraan, 
+    strp.no_registrasi, 
+    strp.no_polisi, 
+    strp.nama_pemilik, 
+    strp.alamat_pemilik, 
+    strp.nama_pengemudi, 
+    strp.no_sim, 
+    strp.no_pasport, 
+    strp.jenis_kendaraan, 
+    strp.tahun_pembuatan, 
+    strp.cc, 
+    strp.no_rangka, 
+    strp.no_mesin, 
+    strp.warna, 
+    strp.maksud_kunjungan, 
+    strp.alamat_tujuan, 
+    strp.berlaku_hingga, 
+    strp.files,
+    warga_negara.warga_negara,
+    bahan_bakar.bahan_bakar
+      FROM kedatangan 
+      JOIN formulir_wawancara ON kedatangan.id_fw = formulir_wawancara.id_fw 
+      JOIN alamat_pengemudi ON formulir_wawancara.id_fw = alamat_pengemudi.id_fw 
+      JOIN alamat_kendaraan ON formulir_wawancara.id_fw = alamat_kendaraan.id_fw 
+      JOIN alamat_tujuan ON formulir_wawancara.id_fw = alamat_tujuan.id_fw 
+      JOIN kepemilikan_kendaraan ON formulir_wawancara.id_kepemilikan_kendaraan = kepemilikan_kendaraan.id_kepemilikan_kendaraan
+      JOIN strp ON formulir_wawancara.id_strp = strp.id_strp
+      JOIN warga_negara ON strp.id_warga_negara = warga_negara.id_warga_negara
+      JOIN bahan_bakar ON strp.id_bahan_bakar = bahan_bakar.id_bahan_bakar
+      ORDER BY kedatangan.id_kedatangan DESC
+  ";
+  if (isset($_POST["validasi_strp_kedatangan"])) {
+    $validated_post = array_map(function ($value) use ($conn) {
+      return valid($conn, $value);
+    }, $_POST);
+    if (validasi_kedatangan($conn, $validated_post, $action = 'strp', $idUser, $baseURL) > 0) {
+      $message = "Data STRP telah di validasi.";
+      $message_type = "success";
+      alert($message, $message_type);
+      header("Location: kedatangan");
+      exit();
+    }
+  }
+  if (isset($_POST["validasi_formulir_kedatangan"])) {
+    $validated_post = array_map(function ($value) use ($conn) {
+      return valid($conn, $value);
+    }, $_POST);
+    if (validasi_kedatangan($conn, $validated_post, $action = 'formulir', $idUser, $baseURL) > 0) {
+      $message = "Data Formulir Wawancara telah di validasi";
+      $message_type = "success";
+      alert($message, $message_type);
+      header("Location: kedatangan");
+      exit();
+    }
+  }
+
+  if(isset($_POST['search_kedatangan'])){
+    $type_file=valid($conn, $_POST['type_file']);
+    $no_polisi=valid($conn, $_POST['no_polisi']);
+    $_SESSION["kedatangan"] = [
+      "type_file" => $type_file,
+      "no_polisi" => $no_polisi,
+      "time_search" => time()
+    ];
+    header("Location: kedatangan");
+    exit;
+  }
+  if (isset($_SESSION["kedatangan"])){
+    if (isset($_SESSION['kedatangan']["time_search"]) && (time() - $_SESSION['kedatangan']["time_search"]) > 5) {
+      unset($_SESSION['kedatangan']);
+    }
+  }
 }

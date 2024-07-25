@@ -66,10 +66,12 @@ require_once("../../templates/views-top.php");
                   <a href="#" class="menu-link px-3" data-bs-toggle="modal"
                     data-bs-target="#ubah<?= $row['id_strp'] ?>">Ubah</a>
                 </div>
+                <?php if($role==4){?>
                 <div class="menu-item px-3">
                   <a href="#" class="menu-link px-3" data-bs-toggle="modal"
                     data-bs-target="#hapus<?= $row['id_strp'] ?>">Hapus</a>
                 </div>
+                <?php }?>
               </div>
 
               <div class="modal fade" id="detail<?= $row['id_strp'] ?>" tabindex="-1"
@@ -132,7 +134,8 @@ require_once("../../templates/views-top.php");
                 <div class="modal-dialog modal-xl">
                   <div class="modal-content">
                     <div class="modal-header border-bottom-0 shadow">
-                      <h5 class="modal-title" id="exampleModalLabel">Files Persyaratan <?= $row['nama_pengemudi'] ?></h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Files Persyaratan <?= $row['nama_pengemudi'] ?>
+                      </h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center">
@@ -415,7 +418,7 @@ require_once("../../templates/views-top.php");
                         </div>
                         <div class="mb-5 fv-row">
                           <label class="required form-label">Berlaku Hingga</label>
-                          <input type="text" name="berlaku_hingga" class="form-control mb-2"
+                          <input type="date" name="berlaku_hingga" class="form-control mb-2"
                             value="<?= $row['berlaku_hingga']?>" placeholder="Berlaku Hingga" required />
                         </div>
                       </div>
