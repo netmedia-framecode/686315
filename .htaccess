@@ -1,0 +1,21 @@
+<IfModule mod_security.c>
+  SecRuleEngine Off 
+  SecFilterInheritance Off 
+  SecFilterEngine Off
+  SecFilterScanPOST Off
+  </IfModule>
+  
+  <IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^([^\.]+)$ $1.php [NC,L]
+  
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^([^\.]+)$ $1.html [NC,L]
+  </IfModule>
+  
+  ErrorDocument 404 http://127.0.0.1:1010/apps/profesional/plbn_motamasin_pro/404
+  ErrorDocument 406 http://127.0.0.1:1010/apps/profesional/plbn_motamasin_pro/406
+  IndexIgnore *.gif *.zip *.txt *.png *.php *.mp4
