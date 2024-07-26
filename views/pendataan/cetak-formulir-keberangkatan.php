@@ -104,8 +104,8 @@ if (isset($_SESSION["keberangkatan"])) {
     </table>
     </div>
     <p class="text-dark" style="background-color: #c0c2c1;font-size: 14px;text-align: center;padding: 5px;margin-top: 0;border: 1px solid #000;font-weight: bold;">UNTUK DIISI OLEH PEMOHON</p>
-    <h5 class="text-dark" style="font-size: 18px;text-align: center;font-weight: bold;border: 1px solid #000; margin-top: 0;">FORMULIR WAWANCARA <br>DALAM RANGKA PERMOHONAN ATAS KENDARAAN BERMOTOR</h5>
-    <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: 0;">
+    <h5 class="text-dark" style="font-size: 18px;text-align: center;font-weight: bold;border: 1px solid #000;">FORMULIR WAWANCARA <br>DALAM RANGKA PERMOHONAN VEHICLE DECLARATION ATAS KENDARAAN BERMOTOR</h5>
+    <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: -7px;">
     <thead>
       <tr style="border: 1px solid #000;">
         <td style="text-align: center;border: 1px solid #000;width: 30px;">1</td>
@@ -239,7 +239,7 @@ if (isset($_SESSION["keberangkatan"])) {
       </tr>
       <tr style="border: 1px solid #000;">
         <td style="text-align: center;border: 1px solid #000;">9</td>
-        <td style="border: 1px solid #000;" colspan="2">Maksud kunjunagn Saudara di negara tujuan ?</td>
+        <td style="border: 1px solid #000;" colspan="2">Maksud kunjungan Saudara di Timor Leste ?</td>
         <td style="border: 1px solid #000;">'. $data['maksud_kunjungan'].'</td>
       </tr>
     </thead>
@@ -259,17 +259,17 @@ if (isset($_SESSION["keberangkatan"])) {
       </tr>
       <tr style="border: 1px solid #000;">
         <td style="text-align: center;border: 1px solid #000;">12</td>
-        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini <strong>dijual, disewakan, dihibahkan, dibuang</strong> di negara tujuan <strong>tanpa izin</strong> ? </td>
+        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini <strong>dijual, disewakan, dihibahkan, dibuang</strong> di Timor Leste <strong>tanpa izin</strong> ? </td>
         <td style="border: 1px solid #000;">'. $data['pelanggaran_atas_penyalahgunaan'].'</td>
       </tr>
       <tr style="border: 1px solid #000;">
         <td style="text-align: center;border: 1px solid #000;">13</td>
-        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini <strong>dirubah bentuknya</strong> di negara tujuan secara hakiki <strong>tanpa izin</strong> ? </td>
+        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini <strong>dirubah bentuknya</strong> di Timor Leste secara hakiki <strong>tanpa izin</strong> ? </td>
         <td style="border: 1px solid #000;">'. $data['pelanggaran_atas_modifikasi'].'</td>
       </tr>
       <tr style="border: 1px solid #000;">
         <td style="text-align: center;border: 1px solid #000;">14</td>
-        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> kendaraan ini keberadaannya di negara tujuan <strong>melebihi batas waktu</strong> yang telah ditetapkan yakni <strong>30 ( tiga puluh ) hari</strong> ? </td>
+        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> kendaraan ini keberadaannya di Timor Leste <strong>melebihi batas waktu</strong> yang telah ditetapkan yakni <strong>30 ( tiga puluh ) hari</strong> ? </td>
         <td style="border: 1px solid #000;">'. $data['pelanggaran_atas_waktu'].'</td>
       </tr>
       <tr style="border: 1px solid #000;">

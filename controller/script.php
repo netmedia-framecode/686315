@@ -720,11 +720,11 @@ if (isset($_SESSION['data-user'])) {
     header("Location: keberangkatan");
     exit;
   }
-  // if (isset($_SESSION["keberangkatan"])){
-  //   if (isset($_SESSION['keberangkatan']["time_search"]) && (time() - $_SESSION['keberangkatan']["time_search"]) > 15) {
-  //     unset($_SESSION['keberangkatan']);
-  //   }
-  // }
+  if (isset($_SESSION["keberangkatan"])){
+    if (isset($_SESSION['keberangkatan']["time_search"]) && (time() - $_SESSION['keberangkatan']["time_search"]) > 300) {
+      unset($_SESSION['keberangkatan']);
+    }
+  }
   
   $count_kedatangan = "SELECT * FROM kedatangan";
   $counts_kedatangan = mysqli_query($conn, $count_kedatangan);
@@ -796,6 +796,7 @@ if (isset($_SESSION['data-user'])) {
       JOIN bahan_bakar ON strp.id_bahan_bakar = bahan_bakar.id_bahan_bakar
       ORDER BY kedatangan.id_kedatangan DESC
   ";
+  $views_kedatangan = mysqli_query($conn, $kedatangan);
   if (isset($_POST["validasi_strp_kedatangan"])) {
     $validated_post = array_map(function ($value) use ($conn) {
       return valid($conn, $value);
@@ -833,7 +834,7 @@ if (isset($_SESSION['data-user'])) {
     exit;
   }
   if (isset($_SESSION["kedatangan"])){
-    if (isset($_SESSION['kedatangan']["time_search"]) && (time() - $_SESSION['kedatangan']["time_search"]) > 5) {
+    if (isset($_SESSION['kedatangan']["time_search"]) && (time() - $_SESSION['kedatangan']["time_search"]) > 300) {
       unset($_SESSION['kedatangan']);
     }
   }

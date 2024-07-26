@@ -74,10 +74,10 @@ if (isset($_SESSION["kedatangan"])) {
       WHERE strp.no_polisi = '$no_polisi'
       AND kedatangan.status_strp = 'Valid'
       OR kedatangan.status_formulir = 'Valid'
-      ORDER BY kedatangan.id_keberangkatan LIMIT 1
+      ORDER BY kedatangan.id_kedatangan LIMIT 1
   ";
-  $views_keberangkatan = mysqli_query($conn, $kedatangan);
-  $data = mysqli_fetch_assoc($views_keberangkatan);
+  $views_kedatangan = mysqli_query($conn, $kedatangan);
+  $data = mysqli_fetch_assoc($views_kedatangan);
   $tgl_lahir = date_create($data["tgl_lahir"]);
   $tgl_lahir = date_format($tgl_lahir, "d M Y");
   $mpdf = new \Mpdf\Mpdf();
@@ -239,7 +239,7 @@ if (isset($_SESSION["kedatangan"])) {
       </tr>
       <tr style="border: 1px solid #000;">
         <td style="text-align: center;border: 1px solid #000;">9</td>
-        <td style="border: 1px solid #000;" colspan="2">Maksud kunjunagn Saudara di negara tujuan ?</td>
+        <td style="border: 1px solid #000;" colspan="2">Apa keperluan Saudara ke Indonesia ?</td>
         <td style="border: 1px solid #000;">'. $data['maksud_kunjungan'].'</td>
       </tr>
     </thead>
@@ -249,7 +249,7 @@ if (isset($_SESSION["kedatangan"])) {
     <thead>
       <tr style="border: 1px solid #000;">
         <td style="text-align: center;border: 1px solid #000;">10</td>
-        <td style="border: 1px solid #000;" colspan="2">Rencana jangka waktu kunjungan ?</td>
+        <td style="border: 1px solid #000;" colspan="2">Berapa lama jangka waktu kunjungan ?</td>
         <td style="border: 1px solid #000;">'. $data['waktu_kunjungan'].'</td>
       </tr>
       <tr style="border: 1px solid #000;">
@@ -259,17 +259,17 @@ if (isset($_SESSION["kedatangan"])) {
       </tr>
       <tr style="border: 1px solid #000;">
         <td style="text-align: center;border: 1px solid #000;">12</td>
-        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini <strong>dijual, disewakan, dihibahkan, dibuang</strong> di negara tujuan <strong>tanpa izin</strong> ? </td>
+        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini <strong>dijual, disewakan, dihibahkan, dibuang</strong> di Indonesia <strong>tanpa izin</strong> ? </td>
         <td style="border: 1px solid #000;">'. $data['pelanggaran_atas_penyalahgunaan'].'</td>
       </tr>
       <tr style="border: 1px solid #000;">
         <td style="text-align: center;border: 1px solid #000;">13</td>
-        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini <strong>dirubah bentuknya</strong> di negara tujuan secara hakiki <strong>tanpa izin</strong> ? </td>
+        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini <strong>dirubah bentuknya</strong> di Indonesia secara hakiki <strong>tanpa izin</strong> ? </td>
         <td style="border: 1px solid #000;">'. $data['pelanggaran_atas_modifikasi'].'</td>
       </tr>
       <tr style="border: 1px solid #000;">
         <td style="text-align: center;border: 1px solid #000;">14</td>
-        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> kendaraan ini keberadaannya di negara tujuan <strong>melebihi batas waktu</strong> yang telah ditetapkan yakni <strong>30 ( tiga puluh ) hari</strong> ? </td>
+        <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> kendaraan ini keberadaannya di Indonesia <strong>melebihi batas waktu</strong> yang telah ditetapkan yakni <strong>30 ( tiga puluh ) hari</strong> ? </td>
         <td style="border: 1px solid #000;">'. $data['pelanggaran_atas_waktu'].'</td>
       </tr>
       <tr style="border: 1px solid #000;">

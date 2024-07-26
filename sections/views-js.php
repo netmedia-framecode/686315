@@ -16,6 +16,19 @@
 <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 <!--end::Javascript-->
 
+<div class="translate" id="google_translate_element"></div>
+<div class="gtranslate_wrapper"></div>
+<script>
+  window.gtranslateSettings = {
+    "default_language": "id",
+    "native_language_names": true,
+    "detect_browser_language": true,
+    "languages": ["id", "pt", "en"],
+    "wrapper_selector": ".gtranslate_wrapper"
+  }
+</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
 <script>
   CKEDITOR.replace('deskripsi');
 </script>

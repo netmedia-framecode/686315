@@ -93,16 +93,16 @@ if (isset($_SESSION["kedatangan"])) {
       </table>
     </div>
     <p class="text-dark" style="font-size: 12px;text-align: left;padding: 5px;margin-top: 0;border-bottom: 3px solid black;font-weight: bold;">Jalan Ahmad Yani No.10 Betun - Malaka 85672</p>
-    <h5 class="text-dark" style="font-size: 14px;text-align: center;font-weight: bold; margin-top: 0;">SURAT TANDA REGISTRASI PENOMORAN (STRP) RANMOR INDONESIA YANG MASUK DIWILAYAH RDTL</h5>
+    <h5 class="text-dark" style="font-size: 14px;text-align: center;font-weight: bold; margin-top: 0;">SURAT TANDA REGISTRASI PENOMORAN (STRP) RANMOR TIMOR LESTE YANG MASUK DIWILAYAH INDONESIA</h5>
     <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: 0;">
       <thead>
         <tr style="">
-          <th style="text-align: left;" colspan="3">Telah melapor di SATUAN LALU LINTAS PLBN MOTAMASIN, kendaraan Indonesia dengan identitas sebagai berikut :</th>
+          <th style="text-align: left;" colspan="3">Telah melapor di SATUAN LALU LINTAS PLBN MOTAMASIN, kendaraan Timor Leste dengan identitas sebagai berikut :</th>
         </tr>
         <tr style="">
           <td style=""width: 250px;>Nomor Registrasi</td>
           <td>:</td>
-          <td style="">STRP / '. $data["no_registrasi"].' / II ? '. date('Y').' / MOTAMASIN</td>
+          <td style="">STNK LBN / '. $data["no_registrasi"].' / II ? '. date('Y').' / MOTAMASIN</td>
         </tr>
         <tr style="">
           <td style="">Nomor Polisi</td>

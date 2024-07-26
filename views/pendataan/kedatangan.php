@@ -21,16 +21,16 @@ require_once("../../templates/views-top.php");
             <label class="required form-label">Pilih data yang akan anda cetak ?</label>
             <div class="d-flex">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="type_file" id="strp" value="strp" checked>
-                <label class="form-check-label" for="strp">
-                  STRP
+                <input class="form-check-input" type="radio" name="type_file" id="formulir-wawancara"
+                  value="formulir_wawancara" checked>
+                <label class="form-check-label" for="formulir-wawancara">
+                  Formulir Wawancara
                 </label>
               </div>
               <div class="form-check" style="margin-left: 10px;">
-                <input class="form-check-input" type="radio" name="type_file" id="formulir-wawancara"
-                  value="formulir_wawancara">
-                <label class="form-check-label" for="formulir-wawancara">
-                  Formulir Wawancara
+                <input class="form-check-input" type="radio" name="type_file" id="strp" value="strp">
+                <label class="form-check-label" for="strp">
+                  STRP
                 </label>
               </div>
             </div>
@@ -86,7 +86,7 @@ require_once("../../templates/views-top.php");
             while ($row = mysqli_fetch_assoc($views_kedatangan)) { ?>
           <tr>
             <td><?= $row['kategori'] ?></td>
-            <td>STRP/<?= $row['no_registrasi'] ?>/II/<?= date('Y')?>/Motamasin</td>
+            <td>STNK LBN/<?= $row['no_registrasi'] ?>/II/<?= date('Y')?>/Motamasin</td>
             <td><?= $row['no_polisi'] ?></td>
             <td><?= $row['nama_pengemudi'] ?></td>
             <td><?= $row['status_strp'] ?></td>
@@ -363,19 +363,24 @@ require_once("../../templates/views-top.php");
                       </div>
                       <div class="modal-footer border-top-0 justify-content-center">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <?php if($row['status_formulir']=="Valid"){?>
                         <button type="submit" name="validasi_strp_kedatangan" class="btn btn-warning">Ubah</button>
+                        <?php }else{?>
+                        <button type="button" class="btn btn-outline-warning border shadow">Ubah</button>
+                        <p class="mt-5">Anda belum bisa validasi dikarenakan berkas Formulir Wawancara belum di validasi!</p>
+                        <?php }?>
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
-              <?php }else if($role==1 && $row["status_formulir"]!="Valid"){?>
+              <?php }if($role==1 && $row["status_formulir"]!="Valid"){?>
               <div class="modal fade" id="ubah<?= $row['id_kedatangan'] ?>" tabindex="-1"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header border-bottom-0 shadow">
-                      <h5 class="modal-title" id="exampleModalLabel">Ubah STRP <?= $row['nama_pengemudi'] ?></h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Ubah Formulir Wawancara <?= $row['nama_pengemudi'] ?></h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="" method="POST" enctype="multipart/form-data">
@@ -404,13 +409,8 @@ require_once("../../templates/views-top.php");
                       </div>
                       <div class="modal-footer border-top-0 justify-content-center">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <?php if($row['status_strp']=="Valid"){?>
                         <button type="submit" name="validasi_formulir_kedatangan"
                           class="btn btn-outline-warning">Ubah</button>
-                        <?php }else{?>
-                        <button type="button" class="btn btn-outline-warning border shadow">Ubah</button>
-                        <p class="mt-5">Anda belum bisa validasi dikarenakan berkas STRP belum di validasi!</p>
-                        <?php }?>
                       </div>
                     </form>
                   </div>
@@ -497,7 +497,7 @@ require_once("../../templates/views-top.php");
         JOIN warga_negara ON strp.id_warga_negara = warga_negara.id_warga_negara
         JOIN bahan_bakar ON strp.id_bahan_bakar = bahan_bakar.id_bahan_bakar
         WHERE strp.no_polisi = '$no_polisi'
-        AND kedatangan.status_strp = 'Valid'
+        AND kedatangan.status_formulir = 'Valid'
     ";
     $views_kedatangan = mysqli_query($conn, $kedatangan);
     if(mysqli_num_rows($views_kedatangan)==0){?>
@@ -518,7 +518,7 @@ require_once("../../templates/views-top.php");
       <a href="cetak-strp-kedatangan" class="btn btn-success ml-3" target="_blank"><i class="bi bi-printer"></i>
         Cetak</a>
     </div>
-    <div style="border-bottom: 3px solid black;width: 100%;">
+    <div style="width: 100%;">
       <table style="width: 100%;" style="border: 1px solid #000;">
         <tbody>
           <tr>
@@ -532,103 +532,103 @@ require_once("../../templates/views-top.php");
       </table>
     </div>
     <p class="text-dark"
-      style="background-color: #c0c2c1;font-size: 14px;text-align: left;padding: 5px;margin-top: 0;border: 1px solid #000;font-weight: bold;">
+      style="font-size: 14px;text-align: left;padding: 5px;margin-top: 0;border-bottom: 2px solid #000;font-weight: bold;">
       Jalan Ahmad Yani No.10 Betun - Malaka 85672</p>
     <h5 class="text-dark"
-      style="font-size: 18px;text-align: center;font-weight: bold;border: 1px solid #000; margin-top: 0;">SURAT TANDA
-      REGISTRASI PENOMORAN (STRP) RANMOR INDONESIA YANG MASUK DIWILAYAH RDTL
+      style="font-size: 18px;text-align: center;font-weight: bold; margin-top: 0;">SURAT TANDA
+      REGISTRASI PENOMORAN (STRP) RANMOR TIMOR LESTE YANG MASUK DIWILAYAH INDONESIA
     </h5>
     <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: 0;">
       <thead>
-        <tr style="border: 1px solid #000;">
-          <th style="border: 1px solid #000;" colspan="3">Telah melapor di SATUAN LALU LINTAS PLBN MOTAMASIN, kendaraan
-            Indonesia dengan identitas sebagai berikut :</th>
+        <tr style="">
+          <th style="" colspan="3">Telah melapor di SATUAN LALU LINTAS PLBN MOTAMASIN, kendaraan
+            Timor Leste dengan identitas sebagai berikut :</th>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Nomor Registrasi</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;">STRP / <?= $data["no_registrasi"]?> / II ? <?= date('Y')?> / MOTAMASIN
+        <tr style="">
+          <td style="">Nomor Registrasi</td>
+          <td style="">:</td>
+          <td style="">STRP / <?= $data["no_registrasi"]?> / II ? <?= date('Y')?> / MOTAMASIN
           </td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Nomor Polisi</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["no_polisi"]?></td>
+        <tr style="">
+          <td style="">Nomor Polisi</td>
+          <td style="">:</td>
+          <td style=""><?= $data["no_polisi"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Nama Pemilik</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["nama_pemilik"]?></td>
+        <tr style="">
+          <td style="">Nama Pemilik</td>
+          <td style="">:</td>
+          <td style=""><?= $data["nama_pemilik"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Alamat Pemilik</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["alamat_pemilik"]?></td>
+        <tr style="">
+          <td style="">Alamat Pemilik</td>
+          <td style="">:</td>
+          <td style=""><?= $data["alamat_pemilik"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Nama Pengemudi</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["nama_pengemudi"]?></td>
+        <tr style="">
+          <td style="">Nama Pengemudi</td>
+          <td style="">:</td>
+          <td style=""><?= $data["nama_pengemudi"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">No. SIM</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["no_sim"]?></td>
+        <tr style="">
+          <td style="">No. SIM</td>
+          <td style="">:</td>
+          <td style=""><?= $data["no_sim"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">No. Pasport</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["no_pasport"]?></td>
+        <tr style="">
+          <td style="">No. Pasport</td>
+          <td style="">:</td>
+          <td style=""><?= $data["no_pasport"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Warga Negara</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["warga_negara"]?></td>
+        <tr style="">
+          <td style="">Warga Negara</td>
+          <td style="">:</td>
+          <td style=""><?= $data["warga_negara"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Merk / Jenis</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["jenis_kendaraan"]?></td>
+        <tr style="">
+          <td style="">Merk / Jenis</td>
+          <td style="">:</td>
+          <td style=""><?= $data["jenis_kendaraan"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Tahun Pembuatan / CC</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["tahun_pembuatan"]?> / <?= $data["cc"]?></td>
+        <tr style="">
+          <td style="">Tahun Pembuatan / CC</td>
+          <td style="">:</td>
+          <td style=""><?= $data["tahun_pembuatan"]?> / <?= $data["cc"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">No. Rangka</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["no_rangka"]?></td>
+        <tr style="">
+          <td style="">No. Rangka</td>
+          <td style="">:</td>
+          <td style=""><?= $data["no_rangka"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">No. Mesin</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["no_mesin"]?></td>
+        <tr style="">
+          <td style="">No. Mesin</td>
+          <td style="">:</td>
+          <td style=""><?= $data["no_mesin"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Warna</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["warna"]?></td>
+        <tr style="">
+          <td style="">Warna</td>
+          <td style="">:</td>
+          <td style=""><?= $data["warna"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Bahan Bakar</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["bahan_bakar"]?></td>
+        <tr style="">
+          <td style="">Bahan Bakar</td>
+          <td style="">:</td>
+          <td style=""><?= $data["bahan_bakar"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Maksud Kunjungan</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["maksud_kunjungan"]?></td>
+        <tr style="">
+          <td style="">Maksud Kunjungan</td>
+          <td style="">:</td>
+          <td style=""><?= $data["maksud_kunjungan"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Alamat Tujuan</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["alamat_tujuan"]?></td>
+        <tr style="">
+          <td style="">Alamat Tujuan</td>
+          <td style="">:</td>
+          <td style=""><?= $data["alamat_tujuan"]?></td>
         </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Berlaku Hingga</td>
-          <td style="border: 1px solid #000;">:</td>
-          <td style="border: 1px solid #000;"><?= $data["berlaku_hingga"]?></td>
+        <tr style="">
+          <td style="">Berlaku Hingga</td>
+          <td style="">:</td>
+          <td style=""><?= $data["berlaku_hingga"]?></td>
         </tr>
       </thead>
     </table>
@@ -669,7 +669,7 @@ require_once("../../templates/views-top.php");
     <h5 class="text-dark"
       style="font-size: 18px;text-align: center;font-weight: bold;border: 1px solid #000; margin-top: 0;">FORMULIR
       WAWANCARA
-      <br>DALAM RANGKA PERMOHONAN ATAS KENDARAAN BERMOTOR
+      <br>DALAM RANGKA PERMOHONAN VEHICLE DECLARATION ATAS KENDARAAN BERMOTOR
     </h5>
     <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: 0;">
       <thead>
@@ -699,19 +699,19 @@ require_once("../../templates/views-top.php");
           <td style="border: 1px solid #000;"><?= $data['jalan_pengemudi'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Keluarahan</td>
+          <td style="border: 1px solid #000;">Distric</td>
           <td style="border: 1px solid #000;"><?= $data['kelurahan_pengemudi'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Kecamatan</td>
+          <td style="border: 1px solid #000;">Sub-Distric</td>
           <td style="border: 1px solid #000;"><?= $data['kecamatan_pengemudi'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Kabupaten / Kota</td>
+          <td style="border: 1px solid #000;">Suco</td>
           <td style="border: 1px solid #000;"><?= $data['kabupaten_kota_pengemudi'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Provinsi</td>
+          <td style="border: 1px solid #000;">Aldeia / Bairro</td>
           <td style="border: 1px solid #000;"><?= $data['provinsi_pengemudi'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
@@ -719,7 +719,7 @@ require_once("../../templates/views-top.php");
           <td style="border: 1px solid #000;"><?= $data['no_pasport_pengemudi'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;" colspan="2">Nomor SIM Pengemudi</td>
+          <td style="border: 1px solid #000;" colspan="2">Nomor SIM (Carta De Cundocao) Pengemudi</td>
           <td style="border: 1px solid #000;"><?= $data['no_sim_pengemudi'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
@@ -728,7 +728,7 @@ require_once("../../templates/views-top.php");
         </tr>
         <tr style="border: 1px solid #000;">
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
-          <td style="border: 1px solid #000;" colspan="2">Apakah Saudara adalah pemilik kendaraan ?</td>
+          <td style="border: 1px solid #000;" colspan="2">Apakah Saudara adalah pemilik kendaraan (Kareta Nain)?</td>
           <td style="border: 1px solid #000;"><?= $data['pemilik_kendaraan']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
@@ -746,19 +746,19 @@ require_once("../../templates/views-top.php");
           <td style="border: 1px solid #000;"><?= $data['jalan_kendaraan'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Keluarahan</td>
+          <td style="border: 1px solid #000;">Distric</td>
           <td style="border: 1px solid #000;"><?= $data['kelurahan_kendaraan'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Kecamatan</td>
+          <td style="border: 1px solid #000;">Sub-Distric</td>
           <td style="border: 1px solid #000;"><?= $data['kecamatan_kendaraan'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Kabupaten / Kota</td>
+          <td style="border: 1px solid #000;">Suco</td>
           <td style="border: 1px solid #000;"><?= $data['kabupaten_kota_kendaraan'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Provinsi</td>
+          <td style="border: 1px solid #000;">Aldeia / Bairro</td>
           <td style="border: 1px solid #000;"><?= $data['provinsi_kendaraan'] ?></td>
         </tr>
         <tr style="border: 1px solid #000;">
@@ -783,34 +783,34 @@ require_once("../../templates/views-top.php");
         </tr>
         <tr style="border: 1px solid #000;">
           <td style="text-align: center;border: 1px solid #000;" rowspan="5"><?= $no++;?>.</td>
-          <td style="border: 1px solid #000;" rowspan="5">Alamat Tujuan Kunjungan Saudara di negara tujuan ?</td>
+          <td style="border: 1px solid #000;" rowspan="5">Alamat Tujuan Kunjungan Saudara di Indonesia ?</td>
           <td style="border: 1px solid #000;">Jalan</td>
           <td style="border: 1px solid #000;"><?= $data['jalan_tujuan']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Distric</td>
+          <td style="border: 1px solid #000;">Kelurahan</td>
           <td style="border: 1px solid #000;"><?= $data['distric']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Sub-Distric</td>
+          <td style="border: 1px solid #000;">Kecamatan</td>
           <td style="border: 1px solid #000;"><?= $data['sub_distric']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Suco</td>
+          <td style="border: 1px solid #000;">Kabupaten / Kota</td>
           <td style="border: 1px solid #000;"><?= $data['suco']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">Aldeia</td>
+          <td style="border: 1px solid #000;">Provinsi</td>
           <td style="border: 1px solid #000;"><?= $data['aldeia']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
-          <td style="border: 1px solid #000;" colspan="2">Maksud kunjunagn Saudara di negara tujuan ?</td>
+          <td style="border: 1px solid #000;" colspan="2">Ada keperluan apa Saudara ke Indonesia ?</td>
           <td style="border: 1px solid #000;"><?= $data['maksud_kunjungan']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
-          <td style="border: 1px solid #000;" colspan="2">Rencana jangka waktu kunjungan ?</td>
+          <td style="border: 1px solid #000;" colspan="2">Berapa lama jangka waktu kunjungan ?</td>
           <td style="border: 1px solid #000;"><?= $data['waktu_kunjungan']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
@@ -825,7 +825,7 @@ require_once("../../templates/views-top.php");
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
           <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia
             <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini
-            <strong>dijual, disewakan, dihibahkan, dibuang</strong> di negara tujuan <strong>tanpa izin</strong> ?
+            <strong>dijual, disewakan, dihibahkan, dibuang</strong> di Indonesia <strong>tanpa izin</strong> ?
           </td>
           <td style="border: 1px solid #000;"><?= $data['pelanggaran_atas_penyalahgunaan']?></td>
         </tr>
@@ -833,7 +833,7 @@ require_once("../../templates/views-top.php");
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
           <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia
             <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini
-            <strong>dirubah bentuknya</strong> di negara tujuan secara hakiki <strong>tanpa izin</strong> ?
+            <strong>dirubah bentuknya</strong> di Indonesia secara hakiki <strong>tanpa izin</strong> ?
           </td>
           <td style="border: 1px solid #000;"><?= $data['pelanggaran_atas_modifikasi']?></td>
         </tr>
@@ -841,7 +841,7 @@ require_once("../../templates/views-top.php");
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
           <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia
             <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> kendaraan ini
-            keberadaannya di negara tujuan <strong>melebihi batas waktu</strong> yang telah ditetapkan yakni <strong>30
+            keberadaannya di Indonesia <strong>melebihi batas waktu</strong> yang telah ditetapkan yakni <strong>30
               ( tiga puluh ) hari</strong> ?
           </td>
           <td style="border: 1px solid #000;"><?= $data['pelanggaran_atas_waktu']?></td>

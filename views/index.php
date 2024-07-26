@@ -17,7 +17,7 @@ require_once("../templates/views-top.php");
       <div class="card-header pt-5">
         <div class="card-title d-flex flex-column">
           <span
-            class="fs-2hx fw-bolder text-white me-2 lh-1 ls-n2"><?= mysqli_num_rows($views_keberangkatan)." / ".mysqli_num_rows($views_kedatangan) ?></span>
+            class="fs-2hx fw-bolder text-white me-2 lh-1 ls-n2"><?= mysqli_num_rows($counts_keberangkatan)." / ".mysqli_num_rows($counts_kedatangan) ?></span>
           <span class="text-white opacity-50 pt-1 fw-bold fs-6">Keberangkatan / Kedatangan</span>
         </div>
       </div>
@@ -30,7 +30,7 @@ require_once("../templates/views-top.php");
       <div class="card-header pt-5">
         <div class="card-title d-flex flex-column">
           <span
-            class="fs-2hx fw-bolder text-dark me-2 lh-1 ls-n2"><?= mysqli_num_rows($views_keberangkatan)+mysqli_num_rows($views_kedatangan) ?></span>
+            class="fs-2hx fw-bolder text-dark me-2 lh-1 ls-n2"><?= mysqli_num_rows($counts_keberangkatan)+mysqli_num_rows($counts_kedatangan) ?></span>
           <span class="text-gray-400 pt-1 fw-bold fs-6">Jumlah Kendaraan</span>
         </div>
       </div>
@@ -140,7 +140,7 @@ require_once("../templates/views-top.php");
           <div class="mb-3">
             <input class="form-control" type="file" name="files" id="formFile" accept=".pdf">
           </div>
-          <div class="fs-6">Lengkapi persyaratan Surat Tanda Registrasi Permohonan (STRP) dengan mengupload berkas dalam
+          <div class="fs-6">Lengkapi persyaratan STRP dengan mengupload berkas dalam
             format .PDF dengan isi dalam file .PDF sebagai berikut: <br>
             Pribadi<br>
             1. KTP<br>
@@ -439,86 +439,112 @@ require_once("../templates/views-top.php");
                                                                                       } ?>" required />
               </div>
               <hr>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/5pC5c5p7We7iDkLf5Dw5eH9YGV9C5B7i5J3WgR"
+                crossorigin="anonymous"></script>
               <div class="mb-5 fv-row">
-                <label class="required form-label">Apakah Saudara adalah pemilik kendaraan ?</label>
+                <label class="required form-label">Apakah Saudara adalah pemilik kendaraan?</label>
                 <div class="d-flex">
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pemilik_kendaraan" id="ya" value="Ya" checked>
-                    <label class="form-check-label" for="ya">
-                      Ya
-                    </label>
+                    <input class="form-check-input" type="radio" name="pemilik_kendaraan" id="ya_pemilik" value="Ya"
+                      checked>
+                    <label class="form-check-label" for="ya_pemilik">Ya</label>
                   </div>
                   <div class="form-check" style="margin-left: 10px;">
-                    <input class="form-check-input" type="radio" name="pemilik_kendaraan" id="tidak" value="Tidak">
-                    <label class="form-check-label" for="tidak">
-                      Tidak
-                    </label>
+                    <input class="form-check-input" type="radio" name="pemilik_kendaraan" id="tidak_pemilik"
+                      value="Tidak">
+                    <label class="form-check-label" for="tidak_pemilik">Tidak</label>
                   </div>
                 </div>
               </div>
-              <div class="mb-5 fv-row">
-                <label class="form-label">Nama Pemilik Kendaraan</label>
-                <input type="text" name="nama_pemilik_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['nama_pemilik_kendaraan'])) {
-                                                                                        echo $_POST['nama_pemilik_kendaraan'];
-                                                                                      } ?>" />
-              </div>
-              <div class="mb-5 fv-row">
-                <label class="form-label">Nomor Paspor / Identitas Pemilik Kendaraan</label>
-                <input type="text" name="identitas_pemilik_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['identitas_pemilik_kendaraan'])) {
-                                                                                        echo $_POST['identitas_pemilik_kendaraan'];
-                                                                                      } ?>" />
-              </div>
-              <hr>
-              <h6>Alamat Pemilik Kendaraan</h6>
-              <div class="mb-5 fv-row">
-                <label class="required form-label">Jalan</label>
-                <input type="text" name="jalan_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['jalan_kendaraan'])) {
-                                                                                        echo $_POST['jalan_kendaraan'];
-                                                                                      } ?>" />
-              </div>
-              <div class="mb-5 fv-row">
-                <label class="required form-label">Kelurahan</label>
-                <input type="text" name="kelurahan_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['kelurahan_kendaraan'])) {
-                                                                                        echo $_POST['kelurahan_kendaraan'];
-                                                                                      } ?>" />
-              </div>
-              <div class="mb-5 fv-row">
-                <label class="required form-label">Kecamatan</label>
-                <input type="text" name="kecamatan_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['kecamatan_kendaraan'])) {
-                                                                                        echo $_POST['kecamatan_kendaraan'];
-                                                                                      } ?>" />
-              </div>
-              <div class="mb-5 fv-row">
-                <label class="required form-label">Kabupaten / Kota</label>
-                <input type="text" name="kabupaten_kota_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['kabupaten_kota_kendaraan'])) {
-                                                                                        echo $_POST['kabupaten_kota_kendaraan'];
-                                                                                      } ?>" />
-              </div>
-              <div class="mb-5 fv-row">
-                <label class="required form-label">Provinsi</label>
-                <input type="text" name="provinsi_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['provinsi_kendaraan'])) {
-                                                                                        echo $_POST['provinsi_kendaraan'];
-                                                                                      } ?>" />
-              </div>
-              <hr>
-              <div class="mb-5 fv-row">
-                <label class="required form-label">Apakah Saudara memiliki Surat Kuasa ( dalam hal kendaraan pribadi )
-                  atau Surat Tugas ( dalam hal kendaraan dinas ) dari pemilik kendaraan ?</label>
-                <div class="d-flex">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="surat_kuasa" id="ya" value="Ya" checked>
-                    <label class="form-check-label" for="ya">
-                      Ya
-                    </label>
-                  </div>
-                  <div class="form-check" style="margin-left: 10px;">
-                    <input class="form-check-input" type="radio" name="surat_kuasa" id="tidak" value="Tidak">
-                    <label class="form-check-label" for="tidak">
-                      Tidak
-                    </label>
+
+              <div id="pemilik-kendaraan" style="display: none;">
+                <div class="mb-5 fv-row">
+                  <label class="form-label">Nama Pemilik Kendaraan</label>
+                  <input type="text" name="nama_pemilik_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['nama_pemilik_kendaraan'])) {
+      echo $_POST['nama_pemilik_kendaraan'];
+    } ?>" />
+                </div>
+                <div class="mb-5 fv-row">
+                  <label class="form-label">Nomor Paspor / Identitas Pemilik Kendaraan</label>
+                  <input type="text" name="identitas_pemilik_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['identitas_pemilik_kendaraan'])) {
+      echo $_POST['identitas_pemilik_kendaraan'];
+    } ?>" />
+                </div>
+                <hr>
+                <h6>Alamat Pemilik Kendaraan</h6>
+                <div class="mb-5 fv-row">
+                  <label class="required form-label">Jalan</label>
+                  <input type="text" name="jalan_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['jalan_kendaraan'])) {
+      echo $_POST['jalan_kendaraan'];
+    } ?>" />
+                </div>
+                <div class="mb-5 fv-row">
+                  <label class="required form-label">Kelurahan</label>
+                  <input type="text" name="kelurahan_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['kelurahan_kendaraan'])) {
+      echo $_POST['kelurahan_kendaraan'];
+    } ?>" />
+                </div>
+                <div class="mb-5 fv-row">
+                  <label class="required form-label">Kecamatan</label>
+                  <input type="text" name="kecamatan_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['kecamatan_kendaraan'])) {
+      echo $_POST['kecamatan_kendaraan'];
+    } ?>" />
+                </div>
+                <div class="mb-5 fv-row">
+                  <label class="required form-label">Kabupaten / Kota</label>
+                  <input type="text" name="kabupaten_kota_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['kabupaten_kota_kendaraan'])) {
+      echo $_POST['kabupaten_kota_kendaraan'];
+    } ?>" />
+                </div>
+                <div class="mb-5 fv-row">
+                  <label class="required form-label">Provinsi</label>
+                  <input type="text" name="provinsi_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['provinsi_kendaraan'])) {
+      echo $_POST['provinsi_kendaraan'];
+    } ?>" />
+                </div>
+                <div class="mb-5 fv-row">
+                  <label class="required form-label">Apakah Saudara memiliki Surat Kuasa ( dalam hal kendaraan pribadi )
+                    atau Surat Tugas ( dalam hal kendaraan dinas ) dari pemilik kendaraan ?</label>
+                  <div class="d-flex">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="surat_kuasa" id="ya" value="Ya" checked>
+                      <label class="form-check-label" for="ya">
+                        Ya
+                      </label>
+                    </div>
+                    <div class="form-check" style="margin-left: 10px;">
+                      <input class="form-check-input" type="radio" name="surat_kuasa" id="tidak" value="Tidak">
+                      <label class="form-check-label" for="tidak">
+                        Tidak
+                      </label>
+                    </div>
                   </div>
                 </div>
+                <hr>
               </div>
+
+              <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                var pemilikKendaraan = document.getElementById('pemilik-kendaraan');
+                var radioYa = document.getElementById('ya_pemilik');
+                var radioTidak = document.getElementById('tidak_pemilik');
+
+                function togglePemilikKendaraan() {
+                  if (radioYa.checked) {
+                    pemilikKendaraan.style.display = 'block';
+                  } else {
+                    pemilikKendaraan.style.display = 'none';
+                  }
+                }
+
+                radioYa.addEventListener('change', togglePemilikKendaraan);
+                radioTidak.addEventListener('change', togglePemilikKendaraan);
+
+                togglePemilikKendaraan(); // Initial check
+              });
+              </script>
+
               <div class="mb-5 fv-row">
                 <label class="required form-label">Tanda Nomor Kendaraan / Plat Nomor</label>
                 <input type="text" name="plat_nomor" class="form-control mb-2" value="<?php if (isset($_POST['plat_nomor'])) {

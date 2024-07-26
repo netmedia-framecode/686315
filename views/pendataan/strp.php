@@ -1,6 +1,6 @@
 <?php require_once("../../controller/script.php");
 require_once("redirect.php");
-$_SESSION["page-name"] = "STRP";
+$_SESSION["page-name"] = "STRP / STNK LBN";
 $_SESSION["page-url"] = "strp";
 $_SESSION["actual-link"] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $_SESSION["object-link"] = $baseURL . "/views/pendataan/";

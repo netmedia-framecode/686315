@@ -33,6 +33,12 @@ require_once("../../templates/views-top.php");
                   Formulir Wawancara
                 </label>
               </div>
+              <div class="form-check" style="margin-left: 10px;">
+                <input class="form-check-input" type="radio" name="type_file" id="vhd" value="vhd">
+                <label class="form-check-label" for="vhd">
+                  VHD
+                </label>
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -532,14 +538,16 @@ require_once("../../templates/views-top.php");
       </table>
     </div>
     <p class="text-dark"
-      style="font-size: 12px;text-align: left;padding: 5px;margin-top: 0;border-bottom: 2px solid black;font-weight: bold;">Jalan Ahmad Yani No.10 Betun - Malaka 85672</p>
-    <h5 class="text-dark"
-      style="font-size: 12px;text-align: center;font-weight: bold; margin-top: 0;">SURAT TANDA REGISTRASI PENOMORAN (STRP) RANMOR INDONESIA YANG MASUK DIWILAYAH RDTL
+      style="font-size: 12px;text-align: left;padding: 5px;margin-top: 0;border-bottom: 2px solid black;font-weight: bold;">
+      Jalan Ahmad Yani No.10 Betun - Malaka 85672</p>
+    <h5 class="text-dark" style="font-size: 12px;text-align: center;font-weight: bold; margin-top: 0;">SURAT TANDA
+      REGISTRASI PENOMORAN (STRP) RANMOR INDONESIA YANG MASUK DIWILAYAH RDTL
     </h5>
     <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: 0;">
       <thead>
         <tr>
-          <th colspan="3">Telah melapor di SATUAN LALU LINTAS PLBN MOTAMASIN, kendaraan Indonesia dengan identitas sebagai berikut :</th>
+          <th colspan="3">Telah melapor di SATUAN LALU LINTAS PLBN MOTAMASIN, kendaraan Indonesia dengan identitas
+            sebagai berikut :</th>
         </tr>
         <tr>
           <td style="width: 250px;">Nomor Registrasi</td>
@@ -663,11 +671,11 @@ require_once("../../templates/views-top.php");
       style="background-color: #c0c2c1;font-size: 14px;text-align: center;padding: 5px;margin-top: 0;border: 1px solid #000;font-weight: bold;">
       UNTUK DIISI OLEH PEMOHON</p>
     <h5 class="text-dark"
-      style="font-size: 18px;text-align: center;font-weight: bold;border: 1px solid #000; margin-top: 0;">FORMULIR
+      style="font-size: 18px;text-align: center;font-weight: bold;border: 1px solid #000; margin-top: -14px;">FORMULIR
       WAWANCARA
-      <br>DALAM RANGKA PERMOHONAN ATAS KENDARAAN BERMOTOR
+      <br>DALAM RANGKA PERMOHONAN VEHICLE DECLARATION ATAS KENDARAAN BERMOTOR
     </h5>
-    <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: 0;">
+    <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: -7px;">
       <thead>
         <tr style="border: 1px solid #000;">
           <td style="text-align: center;border: 1px solid #000;width: 30px;"><?= $no++;?>.</td>
@@ -801,7 +809,7 @@ require_once("../../templates/views-top.php");
         </tr>
         <tr style="border: 1px solid #000;">
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
-          <td style="border: 1px solid #000;" colspan="2">Maksud kunjunagn Saudara di negara tujuan ?</td>
+          <td style="border: 1px solid #000;" colspan="2">Maksud kunjungan Saudara di Timor Leste ?</td>
           <td style="border: 1px solid #000;"><?= $data['maksud_kunjungan']?></td>
         </tr>
         <tr style="border: 1px solid #000;">
@@ -821,7 +829,7 @@ require_once("../../templates/views-top.php");
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
           <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia
             <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini
-            <strong>dijual, disewakan, dihibahkan, dibuang</strong> di negara tujuan <strong>tanpa izin</strong> ?
+            <strong>dijual, disewakan, dihibahkan, dibuang</strong> di Timor Leste <strong>tanpa izin</strong> ?
           </td>
           <td style="border: 1px solid #000;"><?= $data['pelanggaran_atas_penyalahgunaan']?></td>
         </tr>
@@ -829,7 +837,7 @@ require_once("../../templates/views-top.php");
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
           <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia
             <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> dalam hal kendaraan ini
-            <strong>dirubah bentuknya</strong> di negara tujuan secara hakiki <strong>tanpa izin</strong> ?
+            <strong>dirubah bentuknya</strong> di Timor Leste secara hakiki <strong>tanpa izin</strong> ?
           </td>
           <td style="border: 1px solid #000;"><?= $data['pelanggaran_atas_modifikasi']?></td>
         </tr>
@@ -837,7 +845,7 @@ require_once("../../templates/views-top.php");
           <td style="text-align: center;border: 1px solid #000;"><?= $no++;?>.</td>
           <td style="border: 1px solid #000;" colspan="2">Apakah Saudara bersedia
             <strong>mempertanggungjawabkan</strong> jika <strong>terjadi pelanggaran</strong> kendaraan ini
-            keberadaannya di negara tujuan <strong>melebihi batas waktu</strong> yang telah ditetapkan yakni <strong>30
+            keberadaannya di Timor Leste <strong>melebihi batas waktu</strong> yang telah ditetapkan yakni <strong>30
               ( tiga puluh ) hari</strong> ?
           </td>
           <td style="border: 1px solid #000;"><?= $data['pelanggaran_atas_waktu']?></td>
@@ -849,6 +857,179 @@ require_once("../../templates/views-top.php");
               berupa denda sebesar 100%</strong> dari bea masuk atas Nilai FOB / harga kendaraan yang seharusnya
             dibayarkan ?</td>
           <td style="border: 1px solid #000;"><?= $data['sanksi']?></td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+<?php }else if($type_file=="vhd"){?>
+<div class="card shadow">
+  <div class="card-body">
+    <div class="d-flex justify-content-end">
+      <a href="cetak-vhd" class="btn btn-success ml-3" target="_blank"><i class="bi bi-printer"></i>
+        Cetak</a>
+    </div>
+    <div style="border-bottom: 3px solid black;width: 100%;">
+      <table style="width: 100%;" style="border: 1px solid #000;">
+        <tbody>
+          <tr>
+            <th style="text-align: center;">
+              <img src="<?= $baseURL?>/assets/images/logo-kiri.png" alt="" style="width: 80px;">
+            </th>
+            <td style="text-align: center;">
+              <h5 class="text-dark" style="font-size: 12px;font-weight: bold;">REPUBLIK INDONESIA <br>KEMENTERIAN
+                KEUANGAN
+                <br>DIREKTORAT JENDERAL BEA DAN CUKAI <br><i style="font-size: 12px;color: #000;">VEHICLE DECLARATION</i> <br>EKSPOR YANG DIMAKSUDKAN UNTUK DIIMPOR KEMBALI (EKSPOR SEMENTARA) <br>ATAS KENDARAAN BERMOTOR YANG MELALUI POS LINTAS BATAS NEGARA MOTAMASIN
+              </h5>
+            </td>
+            <th style="text-align: center;">
+              <img src="<?= $baseURL?>/assets/images/logo-kanan.png" alt="" style="width: 100px;height: 100px;">
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-dark"
+      style="background-color: #c0c2c1;font-size: 14px;text-align: center;padding: 5px;margin-top: 0;border: 1px solid #000;font-weight: bold;">
+      UNTUK DIISI OLEH EKSPORTIR</p>
+    <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: -14px;">
+      <thead>
+        <tr style="border: 1px solid #000;">
+          <td style="text-align: center;border: 1px solid #000;" colspan="2">NOMOR PENDAFTARAN / KODE KANTOR : <?= $data['no_registrasi']?> / 081400 <br>TANGGAL : <?= date('d-m-Y')?></td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;width: 700px;">DATA EKSPORTIR</td>
+          <td style="border: 1px solid #000;">PERNYATAAN EKSPORTIR</td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;">1. Nama Pemilik Kendaraan Bermotor : <strong><?= $data['nama_pemilik']?></strong> <br><i>Name od Owner</i></td>
+          <td rowspan="2">1. Bahwa saya akan menyampaikan Vehicle Declaration kepada Pejabat Bea dan Cukai baik saat keluar dari daerah pabean untuk proses ekspor maupun masuk ke daerah pabean untuk proses impor kembali.</td>
+        </tr>
+        <tr style="border-right: 1px solid #000;">
+          <td style="border: 1px solid #000;">2. Alamat Pemilik Kendaraan Bermotor : <strong><?= $data['alamat_pemilik']?></strong> <br>Address of Owner</td>
+        </tr>
+        <tr style="border-right: 1px solid #000;">
+          <td style="border: 1px solid #000;">3. Nomor Passport atau Identitas Lain Pemilik : <strong><?= $data['identitas_pemilik_kendaraan']?></strong> <br>Number od Owner's Passport or Other Identity</td>
+          <td>2. Bahwa saya menerima penetapan nilai pabean dari tarif yang dilakukan oleh Pejabat Bea dan Cukai dalam rangka pemenuhan kepabeanan.</td>
+        </tr>
+        <tr style="border-right: 1px solid #000;">
+          <td style="border: 1px solid #000;">4. Nama Pengemudi : <strong><?= $data['nama_pengemudi']?></strong> <br>Name of Driver</td>
+          <td rowspan="2">3. Bahwa saya bertanggung jawab terhadap kendaraan bermotor untuk tidak dilakukan perubahan dan sanggup membayar bea masuk dan pajak dalam rangka impor apabila terjadi terhadap bagian-bagian (parts) pengganti atau ditambahkan, serta biaya perbaikannya termasuk ongkos angkutan dan asuransi pada kendaraan bermotor.</td>
+        </tr>
+        <tr style="border-right: 1px solid #000;">
+          <td style="border: 1px solid #000;">5. Alamat Pengemudi : <strong><?= $data['jalan_pengemudi'].", ".$data['kelurahan_pengemudi'].", ".$data['kecamatan_pengemudi'].", ".$data['kabupaten_kota_pengemudi'].", ".$data['provinsi_pengemudi'] ?></strong> <br>Address of Driver</td>
+        </tr>
+        <tr style="border-right: 1px solid #000;">
+          <td style="border: 1px solid #000;">6. Nomor Passport atau Identitas Lain pengemudi : <strong><?= $data['no_pasport_pengemudi']?></strong> <br>Number od Driver's Passport or Other Identity</td>
+          <td rowspan="2">4. Apabila saya tidak melakukan ketentuan di atas, maka saya tidak berkeberatan atas tindakan Pejabat Bea dan Cukai untuk menegah hingga melakukan penyitaan atas kendaraan dan barang yang dimuatnya yang saya kuasai untuk penyelesaian sesuai ketentuan yang berlaku.</td>
+        </tr>
+        <tr style="border-right: 1px solid #000;">
+          <td style="border: 1px solid #000;">7. Nomor Lisensi Mengemudi : <strong><?= $data['no_sim_pengemudi']?></strong> <br>Driver's License Number</td>
+        </tr>
+        <tr style="border-right: 1px solid #000;">
+          <td style="border: 1px solid #000;">DATA KENDARAAN</td>
+          <td rowspan="5"></td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;">8. Nomor Registrasi Kendaraan Bermotor : <strong>STRP / <?= $data["no_registrasi"]?> / II ? <?= date('Y')?></strong> <br>Vehicle Registration Card Number</td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;">9. Tanda Nomor Kendaraan Bermotor : <strong><?= $data["no_polisi"]?></strong> <br><i>Registration Plate Number</i></td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;">10. Negara Pendaftaran : <strong>INDONESIA</strong> <br><i>Country of Registration</i></td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;">11. Merk dan jenis kendaraan : <strong><?= $data['merek_kendaraan']?></strong> <br><i>Make and Model of Vehicle</i></td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;">12. Nomor Rangka : <strong><?= $data['no_rangka']?></strong> <br><i>Chassis Number</i></td>
+          <td rowspan="2">Dengan ini saya menyatakan bertanggung jawab atas kebenaran hal-hal yang diberitahukan dalam dokumen ini dan telah memahami isi pernyataan <strong>PLBN MOTAMASIN, <?= date('d-m-Y / h:i:a')?> Eksportir,</strong></td>
+        </tr>
+        <tr style="border-right: 1px solid #000;">
+          <td style="border: 1px solid #000;">13. Nomor Mesin : <strong><?= $data['no_mesin']?></strong> <br><i>Engine Number</i></td>
+        </tr>
+        <tr style="border-right: 1px solid #000;">
+          <td style="border: 1px solid #000;">14. Tahun Pembuatan / cc : <strong><?= $data['tahun_pembuatan']." / ".$data['cc']?></strong> <br><i>Year Manufactured / cc</i></td>
+        </tr>
+        <tr style="border-right: 1px solid #000;">
+          <td style="border: 1px solid #000;">15. Warna Kendaraan Bermotor : <strong><?= $data['warna']?></strong> <br><i>Colour of Vehicle</i></td>
+        </tr>
+        <tr style="border-right: 1px solid #000;border-bottom: 1px solid #000;">
+          <td style="border: 1px solid #000;">16. Alamat (di luar negeri) : <strong>DILI</strong> <br><i>Address of Destination</i></td>
+          <th><?= $data['nama_pemilik']?></th>
+        </tr>
+      </thead>
+    </table>
+    <p class="text-dark"
+      style="background-color: #c0c2c1;font-size: 14px;text-align: center;padding: 5px;margin-top: 0;border: 1px solid #000;font-weight: bold;">
+      UNTUK DIISI OLEH PEJABAT DIREKTORAT JENDERAL BEA DAN CUKAI</p>
+    <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: -14px;">
+      <thead>
+        <tr style="border: 1px solid #000;">
+          <td style="text-align: center;border: 1px solid #000;width: 30px;" colspan="2">SAAT EKSPOR SEMENTARA (PERTAMA)</td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;width: 500px;">1. Izin tinggal di luar negeri sampai tanggal : <strong><?= $data['berlaku_hingga']?></strong></td>
+          <td style="border: 1px solid #000;">Catatan Pemeriksaan Fisik Kendaraan Saat Impor</td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;">2. Asuransi di luar negeri sampai tanggal : <strong></strong></td>
+          <td rowspan="3">Diperiksa sesuai Instruksi : <strong><?php if($data['status_strp']!="Valid"){echo "10%";}else if($data['status_strp']=="Valid"){echo "50%";}else if($data['status_formulir']=="Valid"){echo "100%";}?></strong> <br>Pada tanggal / jam : <strong><?php $tgl_validasi = date_create($data['updated_at']); echo date_format($tgl_validasi, "d-m-Y / h:i:a");?></strong> <br>Atas Kendaraan : <br>a. Jumlah Roda : <strong><?= $data['jenis_kendaraan']?></strong> <br>b. Nomor Polisi : <strong><?= $data['no_polisi']?></strong> <br>Merk / Type / Warna : <strong><?= $data['merek_kendaraan']." / ".$data['warna']?></strong> <br>d. No. Mesin / No. Rangka : <strong><?= $data['no_mesin']." / ".$data['no_rangka']?></strong> <br>e. Uraian Muatan : <strong><?= $data['kepemilikan_kendaraan']?></strong> <br>f. Kesimpulan : <strong><?php if($data['status_formulir']!="Valid"){echo "FISIK KENDARAAN TIDAK SESUAI";}else if($data['status_formulir']=="Valid"){echo "FISIK KENDARAAN SESUAI";}?></strong></td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;">3. Surat ijin/kuasa dari pemilik kendaraan : <strong></strong></td>
+        </tr>
+        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">
+          <td style="border-right: 1px solid #000;height: 150px;">Tanggal Kendaraan Keluar : <?= date('d-m-Y')?> <br><?php if($data['status_formulir']=="Valid"){echo "Setuju/<del>Tidak</del>";}else if($data['status_formulir']!="Valid"){echo "<del>Setuju</del>/Tidak";}?></td>
+        </tr>
+        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">
+          <td style="border-right: 1px solid #000;text-align: center;">Kepala Hanggar PLBN,</td>
+          <td style="border-right: 1px solid #000;text-align: center;">Pejabat Pemeriksa,</td>
+        </tr>
+        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">
+          <td style="border-right: 1px solid #000;text-align: center;height: 100px;"></td>
+          <td style="border-right: 1px solid #000;text-align: center;height: 100px;"></td>
+        </tr>
+        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;border-bottom: 1px solid #000;">
+          <td style="border-right: 1px solid #000;border-bottom: 1px solid #000;text-align: center;">.................................................................. <br>..................................................................</td>
+          <td style="border-right: 1px solid #000;border-bottom: 1px solid #000;text-align: center;">.................................................................. <br>..................................................................</td>
+        </tr>
+      </thead>
+    </table>
+    <p class="text-dark"
+      style="background-color: #c0c2c1;font-size: 14px;text-align: center;padding: 5px;margin-top: 0;border: 1px solid #000;font-weight: bold;">
+      UNTUK DIISI OLEH PEJABAT DIREKTORAT JENDERAL BEA DAN CUKAI</p>
+    <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: -14px;">
+      <thead>
+        <tr style="border: 1px solid #000;">
+          <td style="text-align: center;border: 1px solid #000;width: 30px;" colspan="2">SAAT EKSPOR KEMBALI (PENYELESAIAN EKSPOR SEMENTARA)</td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;text-align: center;width: 500px;">Catatan</td>
+          <td style="border: 1px solid #000;">Catatan Pemeriksaan Fisik Kendaraan Saat Impor Kembali</td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;">1. Kendaraan berangkat menuju : <strong>INDONESIA</strong></td>
+          <td rowspan="3">Diperiksa sesuai Instruksi : <strong></strong> <br>Pada tanggal / jam : <strong>........................../............</strong> <br>Atas Kendaraan : <br>a. Jumlah Roda : <strong><?= $data['jenis_kendaraan']?></strong> <br>b. Nomor Polisi : <strong><?= $data['no_polisi']?></strong> <br>Merk / Type / Warna : <strong><?= $data['merek_kendaraan']." / ".$data['warna']?></strong> <br>d. No. Mesin / No. Rangka : <strong><?= $data['no_mesin']." / ".$data['no_rangka']?></strong> <br>e. Uraian Muatan : <strong></strong> <br>f. Kesimpulan : </td>
+        </tr>
+        <tr style="border: 1px solid #000;">
+          <td style="border: 1px solid #000;">2. Melalui Pos Lintas Batas Negara : <strong>MOTAMASIN</strong></td>
+        </tr>
+        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">
+          <td style="border-right: 1px solid #000;height: 150px;">Tanggal Kendaraan Keluar : ........................../............ <br>(Setuju/Tidak)</td>
+        </tr>
+        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">
+          <td style="border-right: 1px solid #000;text-align: center;">Pejabat Pemeriksa,</td>
+          <td style="border-right: 1px solid #000;text-align: center;">Pejabat Pemeriksa,</td>
+        </tr>
+        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">
+          <td style="border-right: 1px solid #000;text-align: center;height: 100px;"></td>
+          <td style="border-right: 1px solid #000;text-align: center;height: 100px;"></td>
+        </tr>
+        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;border-bottom: 1px solid #000;">
+          <td style="border-right: 1px solid #000;border-bottom: 1px solid #000;text-align: center;">.................................................................. <br>..................................................................</td>
+          <td style="border-right: 1px solid #000;border-bottom: 1px solid #000;text-align: center;">.................................................................. <br>..................................................................</td>
         </tr>
       </thead>
     </table>
