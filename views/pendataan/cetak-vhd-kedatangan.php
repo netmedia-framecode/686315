@@ -1,11 +1,11 @@
 <?php require_once("../../controller/script.php");
 require_once __DIR__ . '/../../assets/vendor/autoload.php';
 
-if (isset($_SESSION["keberangkatan"])) {
+if (isset($_SESSION["kedatangan"])) {
   
-  $type_file=valid($conn, $_SESSION["keberangkatan"]["type_file"]);
-  $no_polisi=valid($conn, $_SESSION["keberangkatan"]["no_polisi"]);
-  $keberangkatan = "SELECT keberangkatan.*, 
+  $type_file=valid($conn, $_SESSION["kedatangan"]["type_file"]);
+  $no_polisi=valid($conn, $_SESSION["kedatangan"]["no_polisi"]);
+  $kedatangan = "SELECT kedatangan.*, 
     formulir_wawancara.kategori, 
     formulir_wawancara.kesehatan, 
     formulir_wawancara.pengemudi_kendaraan, 
@@ -62,8 +62,8 @@ if (isset($_SESSION["keberangkatan"])) {
     strp.files,
     warga_negara.warga_negara,
     bahan_bakar.bahan_bakar
-      FROM keberangkatan 
-      JOIN formulir_wawancara ON keberangkatan.id_fw = formulir_wawancara.id_fw 
+      FROM kedatangan 
+      JOIN formulir_wawancara ON kedatangan.id_fw = formulir_wawancara.id_fw 
       JOIN alamat_pengemudi ON formulir_wawancara.id_fw = alamat_pengemudi.id_fw 
       JOIN alamat_kendaraan ON formulir_wawancara.id_fw = alamat_kendaraan.id_fw 
       JOIN alamat_tujuan ON formulir_wawancara.id_fw = alamat_tujuan.id_fw 
@@ -72,11 +72,11 @@ if (isset($_SESSION["keberangkatan"])) {
       JOIN warga_negara ON strp.id_warga_negara = warga_negara.id_warga_negara
       JOIN bahan_bakar ON strp.id_bahan_bakar = bahan_bakar.id_bahan_bakar
       WHERE strp.no_polisi = '$no_polisi'
-      AND keberangkatan.status_strp = 'Valid'
-      OR keberangkatan.status_formulir = 'Valid'
+      AND kedatangan.status_strp = 'Valid'
+      OR kedatangan.status_formulir = 'Valid'
   ";
-  $views_keberangkatan = mysqli_query($conn, $keberangkatan);
-  $data = mysqli_fetch_assoc($views_keberangkatan);
+  $views_kedatangan = mysqli_query($conn, $kedatangan);
+  $data = mysqli_fetch_assoc($views_kedatangan);
   $customSize = [210, 330]; // 210mm x 330mm
   $mpdf = new \Mpdf\Mpdf([
     'format' => $customSize
@@ -185,48 +185,12 @@ if (isset($_SESSION["keberangkatan"])) {
     }else if($data['status_formulir']=="Valid"){
       $kesimpulan = "FISIK KENDARAAN SESUAI";
     }
-    if($data['status_formulir']=="Valid"){
+    if($data['status_vhd']=="Setuju"){
       $status_plbn = "Setuju/<del>Tidak</del>";
-    }else if($data['status_formulir']!="Valid"){
+    }else{
       $status_plbn = "<del>Setuju</del>/Tidak";
     }
-    $mpdf->WriteHTML('
-    <p class="text-dark" style="background-color: #c0c2c1;font-size: 14px;text-align: center;padding: 5px;margin-top: 0;border: 1px solid #000;font-weight: bold;">
-      UNTUK DIISI OLEH PEJABAT DIREKTORAT JENDERAL BEA DAN CUKAI</p>
-    <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: -14px; font-size: 14px;">
-      <thead>
-        <tr style="border: 1px solid #000;">
-          <td style="text-align: center;border: 1px solid #000;width: 30px;" colspan="2">SAAT EKSPOR SEMENTARA (PERTAMA)</td>
-        </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;width: 300px;">1. Izin tinggal di luar negeri sampai tanggal : <strong>'. $data['berlaku_hingga'].'</strong></td>
-          <td style="border: 1px solid #000;">Catatan Pemeriksaan Fisik Kendaraan Saat Impor</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #000;">2. Asuransi di luar negeri sampai tanggal : <strong></strong></td>
-          <td style="border-right: 1px solid #000;" rowspan="3">Diperiksa sesuai Instruksi : <strong>'.$diperiksa.'</strong> <br>Pada tanggal / jam : <strong>'.$tgl_validasi.'</strong> <br>Atas Kendaraan : <br>a. Jumlah Roda : <strong>'. $data['jenis_kendaraan'].'</strong> <br>b. Nomor Polisi : <strong>'. $data['no_polisi'].'</strong> <br>Merk / Type / Warna : <strong>'. $data['merek_kendaraan']." / ".$data['warna'].'</strong> <br>d. No. Mesin / No. Rangka : <strong>'. $data['no_mesin']." / ".$data['no_rangka'].'</strong> <br>e. Uraian Muatan : <strong>'. $data['kepemilikan_kendaraan'].'</strong> <br>f. Kesimpulan : <strong>'.$kesimpulan.'</strong></td>
-        </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">3. Surat ijin/kuasa dari pemilik kendaraan : <strong></strong></td>
-        </tr>
-        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">
-          <td style="border-right: 1px solid #000;height: 150px;">Tanggal Kendaraan Keluar : '. date('d-m-Y').' <br>'.$status_plbn.'</td>
-        </tr>
-        <tr>
-          <td style="border-left: 1px solid #000;border-right: 1px solid #000;text-align: center;">Kepala Hanggar PLBN,</td>
-          <td style="border-right: 1px solid #000;text-align: center;">Pejabat Pemeriksa,</td>
-        </tr>
-        <tr>
-          <td style="border-left: 1px solid #000;border-right: 1px solid #000;text-align: center;height: 100px;"></td>
-          <td style="border-right: 1px solid #000;text-align: center;height: 100px;"></td>
-        </tr>
-        <tr>
-          <td style="border-left: 1px solid #000;border-right: 1px solid #000;border-bottom: 1px solid #000;text-align: center;">.............................................. <br>..............................................</td>
-          <td style="border-right: 1px solid #000;border-bottom: 1px solid #000;text-align: center;">.............................................. <br>..............................................</td>
-        </tr>
-      </thead>
-    </table>
-    <p class="text-dark" style="background-color: #c0c2c1;font-size: 14px;text-align: center;padding: 5px;margin-top: 0;border: 1px solid #000;font-weight: bold;">
+    $mpdf->WriteHTML('<p class="text-dark" style="background-color: #c0c2c1;font-size: 14px;text-align: center;padding: 5px;margin-top: 0;border: 1px solid #000;font-weight: bold;">
       UNTUK DIISI OLEH PEJABAT DIREKTORAT JENDERAL BEA DAN CUKAI</p>
     <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: -14px; font-size: 14px;">
       <thead>
@@ -239,13 +203,13 @@ if (isset($_SESSION["keberangkatan"])) {
         </tr>
         <tr>
           <td style="border: 1px solid #000;">1. Kendaraan berangkat menuju : <strong>INDONESIA</strong></td>
-          <td style="border-right: 1px solid #000;" rowspan="3">Diperiksa sesuai Instruksi : <strong></strong> <br>Pada tanggal / jam : <strong>........................../............</strong> <br>Atas Kendaraan : <br>a. Jumlah Roda : <strong>'. $data['jenis_kendaraan'].'</strong> <br>b. Nomor Polisi : <strong>'. $data['no_polisi'].'</strong> <br>Merk / Type / Warna : <strong>'. $data['merek_kendaraan']." / ".$data['warna'].'</strong> <br>d. No. Mesin / No. Rangka : <strong>'. $data['no_mesin']." / ".$data['no_rangka'].'</strong> <br>e. Uraian Muatan : <strong></strong> <br>f. Kesimpulan : </td>
+          <td style="border-right: 1px solid #000;" rowspan="3">Diperiksa sesuai Instruksi : <strong></strong> <br>Pada tanggal / jam : <strong>'. date('d-m-Y / h:i:a').'</strong> <br>Atas Kendaraan : <br>a. Jumlah Roda : <strong>'. $data['jenis_kendaraan'].'</strong> <br>b. Nomor Polisi : <strong>'. $data['no_polisi'].'</strong> <br>Merk / Type / Warna : <strong>'. $data['merek_kendaraan']." / ".$data['warna'].'</strong> <br>d. No. Mesin / No. Rangka : <strong>'. $data['no_mesin']." / ".$data['no_rangka'].'</strong> <br>e. Uraian Muatan : <strong>'. $data['kepemilikan_kendaraan'].'</strong> <br>f. Kesimpulan : <strong>'. $data['kesimpulan'].'</strong></td>
         </tr>
         <tr style="border: 1px solid #000;">
           <td style="border: 1px solid #000;">2. Melalui Pos Lintas Batas Negara : <strong>MOTAMASIN</strong></td>
         </tr>
         <tr>
-          <td style="border-left: 1px solid #000;border-right: 1px solid #000;height: 150px;">Tanggal Kendaraan Keluar : ...................../........ <br>(Setuju/Tidak)</td>
+          <td style="border-left: 1px solid #000;border-right: 1px solid #000;height: 150px;">Tanggal Kendaraan Keluar : '. date('d-m-Y / h:i:a').' <br>'.$status_plbn.'</td>
         </tr>
         <tr>
           <td style="border-left: 1px solid #000;border-right: 1px solid #000;text-align: center;">Pejabat Pemeriksa,</td>
@@ -264,6 +228,6 @@ if (isset($_SESSION["keberangkatan"])) {
   
   $mpdf->Output();
   // $mpdf->OutputHttpDownload('try.pdf');
-  // header("Location: keberangkatan");
+  // header("Location: kedatangan");
   // exit;
 }

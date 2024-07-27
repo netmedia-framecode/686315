@@ -26,6 +26,7 @@ require_once("../../templates/views-top.php");
                   STRP
                 </label>
               </div>
+              <?php if($role==1){?>
               <div class="form-check" style="margin-left: 10px;">
                 <input class="form-check-input" type="radio" name="type_file" id="formulir-wawancara"
                   value="formulir_wawancara">
@@ -39,6 +40,7 @@ require_once("../../templates/views-top.php");
                   VHD
                 </label>
               </div>
+              <?php }?>
             </div>
           </div>
           <div class="form-group">
@@ -83,7 +85,9 @@ require_once("../../templates/views-top.php");
             <th class="text-center min-w-125px">Plat Nomor</th>
             <th class="text-center min-w-125px">Nama Pengemudi</th>
             <th class="text-center min-w-125px">Status STRP</th>
+            <?php if($role==1){?>
             <th class="text-center min-w-125px">Status Formulir</th>
+            <?php }?>
             <th class="text-center min-w-100px">Aksi</th>
           </tr>
         </thead>
@@ -96,7 +100,9 @@ require_once("../../templates/views-top.php");
             <td><?= $row['no_polisi'] ?></td>
             <td><?= $row['nama_pengemudi'] ?></td>
             <td><?= $row['status_strp'] ?></td>
+            <?php if($role==1){?>
             <td><?= $row['status_formulir'] ?></td>
+            <?php }?>
             <td class="text-center">
 
               <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click"
@@ -504,6 +510,7 @@ require_once("../../templates/views-top.php");
         JOIN bahan_bakar ON strp.id_bahan_bakar = bahan_bakar.id_bahan_bakar
         WHERE strp.no_polisi = '$no_polisi'
         AND keberangkatan.status_strp = 'Valid'
+        ORDER BY keberangkatan.id_keberangkatan DESC LIMIT 1
     ";
     $views_keberangkatan = mysqli_query($conn, $keberangkatan);
     if(mysqli_num_rows($views_keberangkatan)==0){?>
@@ -866,7 +873,7 @@ require_once("../../templates/views-top.php");
 <div class="card shadow">
   <div class="card-body">
     <div class="d-flex justify-content-end">
-      <a href="cetak-vhd" class="btn btn-success ml-3" target="_blank"><i class="bi bi-printer"></i>
+      <a href="cetak-vhd-keberangkatan" class="btn btn-success ml-3" target="_blank"><i class="bi bi-printer"></i>
         Cetak</a>
     </div>
     <div style="border-bottom: 3px solid black;width: 100%;">
@@ -956,7 +963,7 @@ require_once("../../templates/views-top.php");
           <td style="border: 1px solid #000;">15. Warna Kendaraan Bermotor : <strong><?= $data['warna']?></strong> <br><i>Colour of Vehicle</i></td>
         </tr>
         <tr style="border-right: 1px solid #000;border-bottom: 1px solid #000;">
-          <td style="border: 1px solid #000;">16. Alamat (di luar negeri) : <strong>DILI</strong> <br><i>Address of Destination</i></td>
+          <td style="border: 1px solid #000;">16. Alamat (di luar negeri) : <strong><?= $data['jalan_tujuan'].", ".$data['distric'].", ".$data['sub_distric'].", ".$data['suco'].", ".$data['aldeia'] ?></strong> <br><i>Address of Destination</i></td>
           <th><?= $data['nama_pemilik']?></th>
         </tr>
       </thead>
@@ -985,42 +992,6 @@ require_once("../../templates/views-top.php");
         </tr>
         <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">
           <td style="border-right: 1px solid #000;text-align: center;">Kepala Hanggar PLBN,</td>
-          <td style="border-right: 1px solid #000;text-align: center;">Pejabat Pemeriksa,</td>
-        </tr>
-        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">
-          <td style="border-right: 1px solid #000;text-align: center;height: 100px;"></td>
-          <td style="border-right: 1px solid #000;text-align: center;height: 100px;"></td>
-        </tr>
-        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;border-bottom: 1px solid #000;">
-          <td style="border-right: 1px solid #000;border-bottom: 1px solid #000;text-align: center;">.................................................................. <br>..................................................................</td>
-          <td style="border-right: 1px solid #000;border-bottom: 1px solid #000;text-align: center;">.................................................................. <br>..................................................................</td>
-        </tr>
-      </thead>
-    </table>
-    <p class="text-dark"
-      style="background-color: #c0c2c1;font-size: 14px;text-align: center;padding: 5px;margin-top: 0;border: 1px solid #000;font-weight: bold;">
-      UNTUK DIISI OLEH PEJABAT DIREKTORAT JENDERAL BEA DAN CUKAI</p>
-    <table class="text-dark" style="border-collapse: collapse; width: 100%; margin-top: -14px;">
-      <thead>
-        <tr style="border: 1px solid #000;">
-          <td style="text-align: center;border: 1px solid #000;width: 30px;" colspan="2">SAAT EKSPOR KEMBALI (PENYELESAIAN EKSPOR SEMENTARA)</td>
-        </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;text-align: center;width: 500px;">Catatan</td>
-          <td style="border: 1px solid #000;">Catatan Pemeriksaan Fisik Kendaraan Saat Impor Kembali</td>
-        </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">1. Kendaraan berangkat menuju : <strong>INDONESIA</strong></td>
-          <td rowspan="3">Diperiksa sesuai Instruksi : <strong></strong> <br>Pada tanggal / jam : <strong>........................../............</strong> <br>Atas Kendaraan : <br>a. Jumlah Roda : <strong><?= $data['jenis_kendaraan']?></strong> <br>b. Nomor Polisi : <strong><?= $data['no_polisi']?></strong> <br>Merk / Type / Warna : <strong><?= $data['merek_kendaraan']." / ".$data['warna']?></strong> <br>d. No. Mesin / No. Rangka : <strong><?= $data['no_mesin']." / ".$data['no_rangka']?></strong> <br>e. Uraian Muatan : <strong></strong> <br>f. Kesimpulan : </td>
-        </tr>
-        <tr style="border: 1px solid #000;">
-          <td style="border: 1px solid #000;">2. Melalui Pos Lintas Batas Negara : <strong>MOTAMASIN</strong></td>
-        </tr>
-        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">
-          <td style="border-right: 1px solid #000;height: 150px;">Tanggal Kendaraan Keluar : ........................../............ <br>(Setuju/Tidak)</td>
-        </tr>
-        <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">
-          <td style="border-right: 1px solid #000;text-align: center;">Pejabat Pemeriksa,</td>
           <td style="border-right: 1px solid #000;text-align: center;">Pejabat Pemeriksa,</td>
         </tr>
         <tr style="border-left: 1px solid #000;border-right: 1px solid #000;">

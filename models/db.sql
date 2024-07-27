@@ -260,6 +260,7 @@ CREATE TABLE
   keberangkatan (
     id_keberangkatan INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
+    id_fw INT,
     status_strp VARCHAR(50),
     status_formulir VARCHAR(50),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -271,8 +272,11 @@ CREATE TABLE
   kedatangan (
     id_keberangkatan INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
+    id_fw INT,
     status_strp VARCHAR(50),
     status_formulir VARCHAR(50),
+    status_vhd VARCHAR(50),
+    kesimpulan TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (id_user) REFERENCES users (id_user) ON UPDATE CASCADE ON DELETE CASCADE

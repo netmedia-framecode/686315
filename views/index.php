@@ -66,6 +66,7 @@ require_once("../templates/views-top.php");
               </div>
             </div>
           </div>
+          <?php if($role==1){?>
           <div class="col-lg-4">
             <div class="card shadow text-center">
               <i class="bi bi-truck" style="font-size: 60px;"></i>
@@ -75,6 +76,7 @@ require_once("../templates/views-top.php");
               </div>
             </div>
           </div>
+          <?php }?>
         </div>
       </div>
     </div>
@@ -96,9 +98,8 @@ require_once("../templates/views-top.php");
       </div>
       <div class="card-body pt-0">
         <select name="kategori" class="form-select mb-2" required>
-          <option value="" selected>Pilih Kategori</option>
-          <option value="keberangkatan">Keberangkatan</option>
-          <option value="kedatangan">Kedatangan</option>
+          <option value="keberangkatan" selected>Keberangkatan</option>
+          <!-- <option value="kedatangan">Kedatangan</option> -->
         </select>
       </div>
     </div>
@@ -113,7 +114,6 @@ require_once("../templates/views-top.php");
       </div>
       <div class="card-body pt-0">
         <select name="id_warga_negara" class="form-select mb-2" required>
-          <option value="" selected>Pilih Warga Negara</option>
           <?php foreach ($views_warga_negara as $data) : ?>
           <option value="<?= $data['id_warga_negara'] ?>"><?= $data['warga_negara'] ?></option>
           <?php endforeach; ?>
@@ -138,7 +138,7 @@ require_once("../templates/views-top.php");
         <div class="fv-row w-100 flex-md-root">
           <label class="required form-label">Upload File Persyaratan</label>
           <div class="mb-3">
-            <input class="form-control" type="file" name="files" id="formFile" accept=".pdf">
+            <input class="form-control" type="file" name="files" id="formFile" accept=".pdf" required>
           </div>
           <div class="fs-6">Lengkapi persyaratan STRP dengan mengupload berkas dalam
             format .PDF dengan isi dalam file .PDF sebagai berikut: <br>
@@ -230,7 +230,7 @@ require_once("../templates/views-top.php");
                   required />
               </div>
               <div class="mb-5 fv-row">
-                <label class="required form-label">Merk / Jenis Kendaraan</label>
+                <label class="required form-label">Jenis Kendaraan</label>
                 <input type="text" name="jenis_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['jenis_kendaraan'])) {
                                                                                         echo $_POST['jenis_kendaraan'];
                                                                                       } ?>"
@@ -458,7 +458,7 @@ require_once("../templates/views-top.php");
                 </div>
               </div>
 
-              <div id="pemilik-kendaraan" style="display: none;">
+              <div id="pemilik-kendaraan" style="display: block;">
                 <div class="mb-5 fv-row">
                   <label class="form-label">Nama Pemilik Kendaraan</label>
                   <input type="text" name="nama_pemilik_kendaraan" class="form-control mb-2" value="<?php if (isset($_POST['nama_pemilik_kendaraan'])) {
@@ -532,9 +532,9 @@ require_once("../templates/views-top.php");
 
                 function togglePemilikKendaraan() {
                   if (radioYa.checked) {
-                    pemilikKendaraan.style.display = 'block';
-                  } else {
                     pemilikKendaraan.style.display = 'none';
+                  } else {
+                    pemilikKendaraan.style.display = 'block';
                   }
                 }
 

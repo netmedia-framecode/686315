@@ -878,6 +878,16 @@ if (isset($_SESSION['data-user'])) {
       $sql = "UPDATE kedatangan SET status_formulir='$data[status_formulir]' WHERE id_kedatangan='$data[id_kedatangan]'";
     }
 
+    if ($action == "vhd") {
+      $check_id_kedatangan = "SELECT * FROM kedatangan WHERE id_fw='$data[id_fw]'";
+      $views_id_kedatangan = mysqli_query($conn, $check_id_kedatangan);
+      if(mysqli_num_rows($views_id_kedatangan) > 0) {
+        $sql = "UPDATE kedatangan SET  status_vhd='$data[status_vhd]', kesimpulan='$data[kesimpulan]' WHERE id_fw='$data[id_fw]'";
+      }else{
+        $sql = "INSERT INTO kedatangan(id_user,id_fw,status_strp,status_formulir,status_vhd,kesimpulan) VALUES('$data[id_user]','$data[id_fw]','Valid','Valid','$data[status_vhd]','$data[kesimpulan]')";
+      }
+    }
+
     mysqli_query($conn, $sql);
     return mysqli_affected_rows($conn);
   }

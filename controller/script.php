@@ -821,6 +821,18 @@ if (isset($_SESSION['data-user'])) {
       exit();
     }
   }
+  if (isset($_POST["validasi_vhd_kedatangan"])) {
+    $validated_post = array_map(function ($value) use ($conn) {
+      return valid($conn, $value);
+    }, $_POST);
+    if (validasi_kedatangan($conn, $validated_post, $action = 'vhd', $idUser, $baseURL) > 0) {
+      $message = "Data VHD telah di validasi";
+      $message_type = "success";
+      alert($message, $message_type);
+      header("Location: kedatangan");
+      exit();
+    }
+  }
 
   if(isset($_POST['search_kedatangan'])){
     $type_file=valid($conn, $_POST['type_file']);
